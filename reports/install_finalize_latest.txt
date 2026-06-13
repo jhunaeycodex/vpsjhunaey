@@ -1,0 +1,207 @@
+[1/9] Backup nginx config
+[1/9] Backup nginx config
+nerated_at=2026-06-14T04:50:32+07:00
+web_root=/var/www/html/prediksi
+domain=jhunaey.my.id
+
+================================================================
+## NGINX SYNTAX
+================================================================
++ nginx -t
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+[exit_code=0]
+
+================================================================
+## NGINX SERVICE
+================================================================
++ systemctl is-active nginx; systemctl is-enabled nginx || true
+active
+enabled
+[exit_code=0]
+
+================================================================
+## PORTS
+================================================================
++ ss -ltnp | grep -E ':80|:443|nginx' || true
+LISTEN 0      511          0.0.0.0:443       0.0.0.0:*    users:(("nginx",pid=23888,fd=12),("nginx",pid=22834,fd=12))
+LISTEN 0      511          0.0.0.0:80        0.0.0.0:*    users:(("nginx",pid=23888,fd=5),("nginx",pid=22834,fd=5))  
+LISTEN 0      511             [::]:443          [::]:*    users:(("nginx",pid=23888,fd=11),("nginx",pid=22834,fd=11))
+LISTEN 0      511             [::]:80           [::]:*    users:(("nginx",pid=23888,fd=6),("nginx",pid=22834,fd=6))  
+[exit_code=0]
+
+================================================================
+## CERTBOT CERTIFICATES
+================================================================
++ certbot certificates 2>/dev/null || true
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Found the following certs:
+  Certificate Name: jhunaey.my.id
+    Serial Number: 6d92b1fea072c5f55f68914d8753bcb8fe8
+    Key Type: ECDSA
+    Domains: jhunaey.my.id www.jhunaey.my.id
+    Expiry Date: 2026-09-11 14:33:08+00:00 (VALID: 89 days)
+    Certificate Path: /etc/letsencrypt/live/jhunaey.my.id/fullchain.pem
+    Private Key Path: /etc/letsencrypt/live/jhunaey.my.id/privkey.pem
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+[exit_code=0]
+
+================================================================
+## CERTBOT TIMER
+================================================================
++ systemctl list-timers | grep -E 'certbot|snap.certbot' || true; systemctl status certbot.timer --no-pager 2>/dev/null || true
+Sun 2026-06-14 06:27:56 WIB 1h 37min -                                      - certbot.timer                  certbot.service
+● certbot.timer - Run certbot twice daily
+     Loaded: loaded (/usr/lib/systemd/system/certbot.timer; enabled; preset: enabled)
+     Active: active (waiting) since Sat 2026-06-13 22:30:45 WIB; 6h ago
+    Trigger: Sun 2026-06-14 06:27:56 WIB; 1h 37min left
+   Triggers: ● certbot.service
+
+Jun 13 22:30:45 jhunaey systemd[1]: Started certbot.timer - Run certbot twice daily.
+[exit_code=0]
+
+================================================================
+## UFW STATUS
+================================================================
++ ufw status verbose 2>/dev/null || true
+Status: inactive
+[exit_code=0]
+
+================================================================
+## WEB PROTECTION HTTPS
+================================================================
++ curl -k -I --max-time 10 https://jhunaey.my.id/; curl -k -I --max-time 10 https://jhunaey.my.id/data/generated/manifest.json; curl -k -I --max-time 10 https://jhunaey.my.id/data/generated/markets.json; curl -k -I --max-time 10 https://jhunaey.my.id/server/; curl -k -I --max-time 10 https://jhunaey.my.id/logs/; curl -k -I --max-time 10 https://jhunaey.my.id/data/all_results_from_source_file.json
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0 11455    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+HTTP/1.1 200 OK
+Server: nginx/1.24.0 (Ubuntu)
+Date: Sat, 13 Jun 2026 21:50:34 GMT
+Content-Type: text/html
+Content-Length: 11455
+Last-Modified: Sat, 13 Jun 2026 15:11:02 GMT
+Connection: keep-alive
+ETag: "6a2d7306-2cbf"
+Accept-Ranges: bytes
+
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0   580    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+HTTP/1.1 200 OK
+Server: nginx/1.24.0 (Ubuntu)
+Date: Sat, 13 Jun 2026 21:50:34 GMT
+Content-Type: application/json
+Content-Length: 580
+Last-Modified: Sat, 13 Jun 2026 15:44:09 GMT
+Connection: keep-alive
+ETag: "6a2d7ac9-244"
+Cache-Control: no-store, no-cache, must-revalidate, proxy-revalidate
+Accept-Ranges: bytes
+
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0 28314    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+HTTP/1.1 200 OK
+Server: nginx/1.24.0 (Ubuntu)
+Date: Sat, 13 Jun 2026 21:50:34 GMT
+Content-Type: application/json
+Content-Length: 28314
+Last-Modified: Sat, 13 Jun 2026 15:11:20 GMT
+Connection: keep-alive
+ETag: "6a2d7318-6e9a"
+Cache-Control: no-store, no-cache, must-revalidate, proxy-revalidate
+Accept-Ranges: bytes
+
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0   162    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+HTTP/1.1 403 Forbidden
+Server: nginx/1.24.0 (Ubuntu)
+Date: Sat, 13 Jun 2026 21:50:34 GMT
+Content-Type: text/html
+Content-Length: 162
+Connection: keep-alive
+
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0   162    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+HTTP/1.1 403 Forbidden
+Server: nginx/1.24.0 (Ubuntu)
+Date: Sat, 13 Jun 2026 21:50:34 GMT
+Content-Type: text/html
+Content-Length: 162
+Connection: keep-alive
+
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0   162    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+HTTP/1.1 403 Forbidden
+Server: nginx/1.24.0 (Ubuntu)
+Date: Sat, 13 Jun 2026 21:50:34 GMT
+Content-Type: text/html
+Content-Length: 162
+Connection: keep-alive
+
+[exit_code=0]
+
+================================================================
+## WEB ROOT SENSITIVE CHECK
+================================================================
++ find /var/www/html/prediksi -maxdepth 1 -name '.*' -ls 2>/dev/null || true; find /var/www/html/prediksi -maxdepth 2 -type f \( -name '*.key' -o -name '*.pem' -o -name '*.env' -o -name 'id_rsa*' \) -ls 2>/dev/null || true
+[exit_code=0]
+
+================================================================
+## PERMISSIONS SUMMARY
+================================================================
++ stat -c '%U:%G %a %n' /var/www/html/prediksi /var/www/html/prediksi/index.html /var/www/html/prediksi/data /var/www/html/prediksi/data/generated /var/www/html/prediksi/server /var/www/html/prediksi/logs 2>/dev/null || true
+www-data:www-data 755 /var/www/html/prediksi
+www-data:www-data 644 /var/www/html/prediksi/index.html
+www-data:www-data 755 /var/www/html/prediksi/data
+www-data:www-data 755 /var/www/html/prediksi/data/generated
+www-data:www-data 755 /var/www/html/prediksi/server
+www-data:www-data 755 /var/www/html/prediksi/logs
+[exit_code=0]
+
+================================================================
+## CRON CHECK
+================================================================
++ crontab -l 2>/dev/null || true; ls -lah /etc/cron.d 2>/dev/null || true
+total 28K
+drwxr-xr-x   2 root root   75 Jun 13 22:30 .
+drwxr-xr-x 112 root root 8.0K Jun 13 22:30 ..
+-rw-r--r--   1 root root  802 Apr 16  2023 certbot
+-rw-r--r--   1 root root  201 Apr  8  2024 e2scrub_all
+-rw-r--r--   1 root root  102 Aug  6  2025 .placeholder
+-rw-r--r--   1 root root  396 Aug  6  2025 sysstat
+[exit_code=0]
+
+================================================================
+## SWAP CHECK
+================================================================
++ free -h; swapon --show || true
+               total        used        free      shared  buff/cache   available
+Mem:           961Mi       390Mi       309Mi       2.5Mi       425Mi       570Mi
+Swap:          2.0Gi          0B       2.0Gi
+NAME      TYPE SIZE USED PRIO
+/swapfile file   2G   0B   -2
+[exit_code=0]
+
+================================================================
+## PROCESS CHECK
+================================================================
++ ps aux | grep -E 'analyze|run_analysis|supermax|node|nginx' | grep -v grep || true
+root       22834  0.0  0.7  21928  7644 ?        Ss   04:07   0:00 nginx: master process /usr/sbin/nginx -g daemon on; master_process on;
+www-data   23888  0.0  0.9  23792  9580 ?        S    04:39   0:00 nginx: worker process
+[exit_code=0]
+
+================================================================
+## SUMMARY
+================================================================
+domain_https=200
+manifest_https=200
+markets_https=200
+server_https=403
+logs_https=403
+raw_data_https=403
+INSTALL_FINALIZE_STATUS=OK
