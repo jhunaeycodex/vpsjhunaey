@@ -1,0 +1,240 @@
+FRONTEND INSPECT LIGHT REPORT
+generated_at=2026-06-14T04:56:39+07:00
+web_root=/var/www/html/prediksi
+domain=jhunaey.my.id
+
+== index.html size and hash ==
+-rw-r--r-- 1 www-data www-data 12K Jun 13 22:11 /var/www/html/prediksi/index.html
+5f1e66c3cff581c1eec9ebb06ec8990b75dc9575b107740dc2c0db7ea7fcc90b  /var/www/html/prediksi/index.html
+
+== fetch / json / data references in index.html ==
+213:<script src="assets/js/data-loader.js"></script>
+
+== external-looking references in index/assets ==
+/var/www/html/prediksi/index.html:213:<script src="assets/js/data-loader.js"></script>
+
+== local generated JSON HTTP status ==
+200 https://jhunaey.my.id/data/generated/manifest.json
+200 https://jhunaey.my.id/data/generated/markets.json
+200 https://jhunaey.my.id/data/generated/latest_bbfs_7digit.json
+200 https://jhunaey.my.id/data/generated/latest_next_draw.json
+200 https://jhunaey.my.id/data/generated/latest_prediction_run_audit.json
+
+== first 220 lines of index.html ==
+     1	<!DOCTYPE html>
+     2	<html lang="id">
+     3	<head>
+     4	<meta charset="UTF-8">
+     5	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+     6	<title>Dashboard Prediksi VPS — BBFS 7 Digit Utama</title>
+     7	<style>
+     8	:root {
+     9	  --bg: #0b1220;
+    10	  --surface: #121e30;
+    11	  --surface2: #1a2a40;
+    12	  --border: #1e3050;
+    13	  --teal: #00e5c3;
+    14	  --teal-dim: rgba(0,229,195,0.12);
+    15	  --amber: #ffb800;
+    16	  --amber-dim: rgba(255,184,0,0.12);
+    17	  --green: #00cc70;
+    18	  --green-dim: rgba(0,204,112,0.10);
+    19	  --red: #ff4757;
+    20	  --red-dim: rgba(255,71,87,0.12);
+    21	  --blue: #3d9bff;
+    22	  --txt: #e0e8f5;
+    23	  --txt2: #7a94b8;
+    24	  --txt3: #4a6080;
+    25	  --mono: 'JetBrains Mono','Fira Mono','Cascadia Code',monospace;
+    26	  --sans: 'Inter','Segoe UI',system-ui,sans-serif;
+    27	  --r: 8px;
+    28	  --r2: 12px;
+    29	}
+    30	*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    31	html,body{height:100%;font-family:var(--sans);background:var(--bg);color:var(--txt);overflow:hidden}
+    32	a{color:var(--teal);text-decoration:none}
+    33	b{font-weight:600}
+    34	
+    35	/* LAYOUT */
+    36	.app{display:grid;grid-template-columns:260px 1fr;grid-template-rows:52px 1fr;height:100vh}
+    37	.topbar{grid-column:1/-1;background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 20px;gap:12px;z-index:10}
+    38	.sidebar{background:var(--surface);border-right:1px solid var(--border);overflow-y:auto;display:flex;flex-direction:column}
+    39	.main{overflow-y:auto;padding:20px}
+    40	
+    41	/* TOPBAR */
+    42	.logo{font-family:var(--mono);font-size:15px;font-weight:700;color:var(--teal);letter-spacing:-.5px}
+    43	.logo span{color:var(--txt2);font-weight:400}
+    44	.topbar-info{font-size:11px;color:var(--txt3);margin-left:auto;font-family:var(--mono)}
+    45	.search-wrap{position:relative;margin:0 12px}
+    46	.search-wrap input{background:var(--surface2);border:1px solid var(--border);color:var(--txt);padding:5px 10px 5px 28px;border-radius:6px;font-size:12px;width:180px;outline:none}
+    47	.search-wrap input:focus{border-color:var(--teal)}
+    48	.search-icon{position:absolute;left:8px;top:50%;transform:translateY(-50%);color:var(--txt3);font-size:12px}
+    49	
+    50	/* SIDEBAR */
+    51	.sidebar-header{padding:12px 16px 8px;font-size:10px;font-weight:700;color:var(--txt3);letter-spacing:1.5px;text-transform:uppercase;border-bottom:1px solid var(--border)}
+    52	.mkt-item{display:flex;align-items:center;padding:8px 12px;cursor:pointer;border-left:3px solid transparent;transition:all .15s;gap:8px}
+    53	.mkt-item:hover{background:var(--surface2)}
+    54	.mkt-item.active{background:var(--teal-dim);border-left-color:var(--teal)}
+    55	.mkt-name{font-size:11.5px;flex:1;line-height:1.3}
+    56	.mkt-badge{font-family:var(--mono);font-size:9px;font-weight:700;padding:2px 5px;border-radius:4px;white-space:nowrap}
+    57	.badge-high{background:rgba(0,204,112,.15);color:var(--green)}
+    58	.badge-med{background:rgba(255,184,0,.15);color:var(--amber)}
+    59	.badge-low{background:rgba(255,71,87,.12);color:var(--red)}
+    60	.badge-na{background:var(--surface2);color:var(--txt3)}
+    61	.dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+    62	.dot-high{background:var(--green)}
+    63	.dot-med{background:var(--amber)}
+    64	.dot-low{background:var(--red)}
+    65	.dot-na{background:var(--txt3)}
+    66	
+    67	/* MAIN AREA */
+    68	.page-title{font-size:18px;font-weight:700;margin-bottom:4px}
+    69	.page-sub{font-size:12px;color:var(--txt3);margin-bottom:16px;font-family:var(--mono)}
+    70	
+    71	/* CARDS */
+    72	.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+    73	.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:12px}
+    74	.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:12px}
+    75	.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);padding:14px 16px}
+    76	.card-title{font-size:10px;font-weight:700;color:var(--txt3);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+    77	.card-title .icon{font-size:13px}
+    78	.big-val{font-family:var(--mono);font-size:28px;font-weight:700;color:var(--teal);line-height:1}
+    79	.big-label{font-size:10px;color:var(--txt3);margin-top:4px}
+    80	
+    81	/* BBFS DIGITS */
+    82	.bbfs-section{background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);padding:16px;margin-bottom:12px}
+    83	.bbfs-title{font-size:10px;font-weight:700;color:var(--txt3);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:12px}
+    84	.bbfs-digits{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+    85	.digit-bubble{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:20px;font-weight:800;border:2px solid var(--teal);color:var(--teal);background:var(--teal-dim);box-shadow:0 0 10px rgba(0,229,195,.25);position:relative}
+    86	.digit-bubble.rank1{background:rgba(0,229,195,.22);box-shadow:0 0 18px rgba(0,229,195,.4);border-width:2.5px}
+    87	.digit-bubble .score-badge{position:absolute;bottom:-6px;left:50%;transform:translateX(-50%);background:var(--surface2);border:1px solid var(--border);font-size:7px;padding:1px 4px;border-radius:3px;white-space:nowrap;color:var(--txt2);font-family:var(--mono)}
+    88	.digit-rejected{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:16px;font-weight:700;border:1.5px solid var(--border);color:var(--txt3);background:var(--surface2)}
+    89	.bbfs-meta{font-size:11px;color:var(--txt2);font-family:var(--mono);display:flex;gap:16px;flex-wrap:wrap}
+    90	.bbfs-meta span{display:flex;align-items:center;gap:4px}
+    91	
+    92	/* CANDIDATES TABLE */
+    93	.table-wrap{overflow-x:auto}
+    94	table{width:100%;border-collapse:collapse;font-size:12px}
+    95	th{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--txt3);padding:6px 10px;border-bottom:1px solid var(--border);text-align:left;white-space:nowrap}
+    96	td{padding:6px 10px;border-bottom:1px solid rgba(30,48,80,.6);font-family:var(--mono)}
+    97	tr:last-child td{border-bottom:none}
+    98	tr:hover td{background:rgba(255,255,255,.02)}
+    99	.rank-num{color:var(--txt3);width:28px}
+   100	.cand-num{font-size:15px;font-weight:700;color:var(--txt);letter-spacing:.5px}
+   101	.score-bar-wrap{display:flex;align-items:center;gap:6px}
+   102	.score-bar{height:4px;border-radius:2px;background:var(--teal);transition:width .3s}
+   103	.score-val{font-size:10px;color:var(--txt2);width:32px;text-align:right}
+   104	.conf-pill{font-size:9px;font-weight:700;padding:2px 7px;border-radius:4px}
+   105	.conf-HIGH{background:rgba(0,204,112,.15);color:var(--green)}
+   106	.conf-MEDIUM{background:rgba(255,184,0,.12);color:var(--amber)}
+   107	.conf-LOW{background:rgba(255,71,87,.12);color:var(--red)}
+   108	.gate-ok{color:var(--green);font-size:10px}
+   109	.gate-warn{color:var(--amber);font-size:10px}
+   110	.gate-block{color:var(--red);font-size:10px}
+   111	
+   112	/* STATS SECTION */
+   113	.stat-row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid rgba(30,48,80,.5);font-size:12px}
+   114	.stat-row:last-child{border-bottom:none}
+   115	.stat-label{color:var(--txt2)}
+   116	.stat-val{font-family:var(--mono);color:var(--txt)}
+   117	.stat-val.good{color:var(--green)}
+   118	.stat-val.warn{color:var(--amber)}
+   119	.stat-val.bad{color:var(--red)}
+   120	.progress{height:4px;background:var(--surface2);border-radius:2px;margin-top:4px}
+   121	.progress-fill{height:100%;border-radius:2px;transition:width .4s}
+   122	.fill-teal{background:var(--teal)}
+   123	.fill-green{background:var(--green)}
+   124	.fill-amber{background:var(--amber)}
+   125	.fill-red{background:var(--red)}
+   126	
+   127	/* ROLLING SLICES */
+   128	.slice-row{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:11px}
+   129	.slice-label{color:var(--txt3);width:100px;font-size:10px}
+   130	.slice-bar-wrap{flex:1;display:flex;align-items:center;gap:6px}
+   131	.slice-bar{height:8px;border-radius:4px;min-width:2px}
+   132	.slice-val{font-family:var(--mono);font-size:11px;color:var(--txt);width:40px;text-align:right}
+   133	.slice-status{font-size:9px;font-weight:700;padding:1px 5px;border-radius:3px}
+   134	.slice-stable{background:rgba(0,204,112,.12);color:var(--green)}
+   135	.slice-unstable{background:rgba(255,71,87,.12);color:var(--red)}
+   136	
+   137	/* HISTORY TABLE */
+   138	.hist-row{display:grid;grid-template-columns:90px 60px 60px 40px;gap:8px;padding:4px 6px;font-family:var(--mono);font-size:11px;border-bottom:1px solid rgba(30,48,80,.4);align-items:center}
+   139	.hist-row:last-child{border-bottom:none}
+   140	.hist-row:nth-child(1){background:rgba(0,229,195,.04)}
+   141	.hist-date{color:var(--txt3);font-size:10px}
+   142	.hist-result{font-weight:700;font-size:13px}
+   143	.hist-d2{color:var(--teal);font-weight:700}
+   144	.hist-d3{color:var(--txt2)}
+   145	
+   146	/* DISCLAIMER */
+   147	.disclaimer{background:rgba(255,71,87,.06);border:1px solid rgba(255,71,87,.2);border-radius:var(--r);padding:10px 14px;margin-top:16px;font-size:10.5px;color:#c77;line-height:1.5}
+   148	
+   149	/* WARNING BANNER */
+   150	.warn-banner{background:rgba(255,184,0,.08);border:1px solid rgba(255,184,0,.25);border-radius:var(--r);padding:8px 12px;margin-bottom:10px;font-size:11px;color:var(--amber)}
+   151	
+   152	/* STATUS BADGE */
+   153	.status-ok{display:inline-flex;align-items:center;gap:4px;font-size:10px;color:var(--green);background:rgba(0,204,112,.1);padding:2px 8px;border-radius:5px}
+   154	.status-warn{display:inline-flex;align-items:center;gap:4px;font-size:10px;color:var(--amber);background:rgba(255,184,0,.1);padding:2px 8px;border-radius:5px}
+   155	.status-err{display:inline-flex;align-items:center;gap:4px;font-size:10px;color:var(--red);background:rgba(255,71,87,.1);padding:2px 8px;border-radius:5px}
+   156	
+   157	/* SECTION DIVIDER */
+   158	.section-head{font-size:10px;font-weight:700;color:var(--txt3);letter-spacing:1.5px;text-transform:uppercase;padding:6px 0 8px;border-bottom:1px solid var(--border);margin-bottom:10px;display:flex;align-items:center;gap:6px}
+   159	.section-head::after{content:'';flex:1;height:1px;background:var(--border);margin-left:6px}
+   160	
+   161	/* TABS */
+   162	.tabs{display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:14px}
+   163	.tab{padding:7px 14px;font-size:11px;font-weight:600;cursor:pointer;color:var(--txt3);border-bottom:2px solid transparent;transition:all .15s}
+   164	.tab:hover{color:var(--txt)}
+   165	.tab.active{color:var(--teal);border-bottom-color:var(--teal)}
+   166	
+   167	/* EMPTY STATE */
+   168	.empty{text-align:center;padding:60px 20px;color:var(--txt3)}
+   169	.empty-icon{font-size:36px;margin-bottom:12px}
+   170	.empty-text{font-size:14px;margin-bottom:4px}
+   171	.empty-sub{font-size:12px}
+   172	
+   173	/* SCROLLBAR */
+   174	::-webkit-scrollbar{width:5px;height:5px}
+   175	::-webkit-scrollbar-track{background:transparent}
+   176	::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+   177	::-webkit-scrollbar-thumb:hover{background:var(--txt3)}
+   178	
+   179	/* FRESHENSS */
+   180	.fresh{color:var(--green);font-size:10px}
+   181	.stale{color:var(--amber);font-size:10px}
+   182	
+   183	</style>
+   184	</head>
+   185	<body>
+   186	<div class="app">
+   187	
+   188	  <header class="topbar">
+   189	    <div class="logo">VPS<span>PREDIKSI</span></div>
+   190	    <div style="width:1px;height:20px;background:var(--border);margin:0 4px"></div>
+   191	    <span style="font-size:11px;color:var(--txt3)">BBFS 7 Digit Utama · Mode Super Maksimal · Dashboard Statistik</span>
+   192	    <div class="search-wrap">
+   193	      <span class="search-icon">&#128269;</span>
+   194	      <input type="text" id="search" placeholder="Cari pasaran...">
+   195	    </div>
+   196	    <div class="topbar-info" id="topbar-info">Memuat...</div>
+   197	  </header>
+   198	
+   199	  <aside class="sidebar">
+   200	    <div class="sidebar-header">PASARAN (57)</div>
+   201	    <div id="mkt-list"></div>
+   202	  </aside>
+   203	
+   204	  <main class="main" id="main-content">
+   205	    <div class="empty" style="margin-top:80px">
+   206	      <div class="empty-icon">&#128202;</div>
+   207	      <div class="empty-text">Pilih pasaran dari sidebar</div>
+   208	      <div class="empty-sub">untuk melihat prediksi BBFS 7 Digit Utama</div>
+   209	    </div>
+   210	  </main>
+   211	</div>
+   212	
+   213	<script src="assets/js/data-loader.js"></script>
+   214	</body>
+   215	</html>
+
+Saved: /root/vpsjhunaey/reports/frontend_inspect_latest.txt
