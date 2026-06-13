@@ -1,5 +1,5 @@
 SUPERMAX STATUS
-generated_at=2026-06-14T06:02:06+07:00
+generated_at=2026-06-14T06:11:11+07:00
 web_root=/var/www/html/prediksi
 
 == PROCESS ==
@@ -9,7 +9,7 @@ missing
 
 == MEMORY ==
                total        used        free      shared  buff/cache   available
-Mem:           961Mi       387Mi       309Mi       2.6Mi       428Mi       574Mi
+Mem:           961Mi       380Mi       315Mi       2.6Mi       428Mi       580Mi
 Swap:          2.0Gi          0B       2.0Gi
 
 == DISK ==
@@ -84,3 +84,4 @@ drwxr-xr-x 2 www-data www-data 4.0K Jun 13 23:11 markets
   "warnings_count": 73,
   "fatal_errors_count": 0
 }
+Status saved: /root/vpsjhunaey/reports/supermax_status_latest.txt
