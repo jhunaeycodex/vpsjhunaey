@@ -1,0 +1,2 @@
+WARNING: logs/analysis.lock exists. If no analyzer process is running, this may be stale.
+Move/remove it manually or run scripts/supermax_prepare.sh first.
