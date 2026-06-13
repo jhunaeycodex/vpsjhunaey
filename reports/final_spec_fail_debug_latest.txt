@@ -1,0 +1,14 @@
+FINAL SPEC FAIL DEBUG
+generated_at=2026-06-14T05:59:42+07:00
+web_root=/var/www/html/prediksi
+
+== EXTERNAL REFERENCE MATCHES: index/assets only ==
+Pattern: https?:// OR protocol-relative src/href OR known CDN/tracking hosts
+
+== OVERCLAIM POSITIVE MATCHES: filtered ==
+Pattern excludes lines with bukan/tidak/dilarang/disclaimer/larangan
+
+== QUICK COUNTS ==
+external_count=0
+overclaim_positive_count=0
+DEBUG_STATUS=NO_MATCHES
