@@ -1,5 +1,5 @@
 VPS JHUNAEY STATUS REPORT
-generated_at=2026-06-14T04:39:24+07:00
+generated_at=2026-06-14T04:39:21+07:00
 web_root=/var/www/html/prediksi
 domain=jhunaey.my.id
 ip=202.155.95.27
@@ -11,7 +11,7 @@ pwd=/root/vpsjhunaey
 ## SYSTEM
 ================================================================
 + date -Is; hostnamectl 2>/dev/null || true; uname -a; uptime; whoami; id
-2026-06-14T04:39:24+07:00
+2026-06-14T04:39:21+07:00
  Static hostname: jhunaey
        Icon name: computer-vm
          Chassis: vm 🖴
@@ -27,7 +27,7 @@ Firmware Version: 1.16.0-4.module_el8.9.0+3659+9c8643f3
    Firmware Date: Tue 2014-04-01
     Firmware Age: 12y 2month 1w 6d
 Linux jhunaey 6.8.0-111-generic #111-Ubuntu SMP PREEMPT_DYNAMIC Sat Apr 11 23:16:02 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
- 04:39:24 up  6:34,  5 users,  load average: 0.16, 0.09, 0.04
+ 04:39:21 up  6:34,  5 users,  load average: 0.09, 0.08, 0.03
 root
 uid=0(root) gid=0(root) groups=0(root)
 [exit_code=0]
@@ -46,7 +46,7 @@ tmpfs           481M     0  481M   0% /run/qemu
 tmpfs            97M  8.0K   97M   1% /run/user/0
 
                total        used        free      shared  buff/cache   available
-Mem:           961Mi       393Mi       314Mi       2.5Mi       417Mi       567Mi
+Mem:           961Mi       420Mi       341Mi       2.5Mi       363Mi       541Mi
 Swap:             0B          0B          0B
 [exit_code=0]
 
@@ -72,8 +72,8 @@ active
     Process: 22908 ExecReload=/usr/sbin/nginx -g daemon on; master_process on; -s reload (code=exited, status=0/SUCCESS)
    Main PID: 22834 (nginx)
       Tasks: 2 (limit: 1055)
-     Memory: 2.9M (peak: 4.4M)
-        CPU: 294ms
+     Memory: 2.7M (peak: 4.4M)
+        CPU: 284ms
      CGroup: /system.slice/nginx.service
              ├─22834 "nginx: master process /usr/sbin/nginx -g daemon on; master_process on;"
              └─23888 "nginx: worker process"
@@ -145,7 +145,7 @@ LISTEN 0      511             [::]:80           [::]:*    users:(("nginx",pid=23
   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0   162    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
 HTTP/1.1 404 Not Found
 Server: nginx/1.24.0 (Ubuntu)
-Date: Sat, 13 Jun 2026 21:39:24 GMT
+Date: Sat, 13 Jun 2026 21:39:23 GMT
 Content-Type: text/html
 Content-Length: 162
 Connection: keep-alive
@@ -161,7 +161,7 @@ Connection: keep-alive
   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0   162    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
 HTTP/1.1 404 Not Found
 Server: nginx/1.24.0 (Ubuntu)
-Date: Sat, 13 Jun 2026 21:39:24 GMT
+Date: Sat, 13 Jun 2026 21:39:23 GMT
 Content-Type: text/html
 Content-Length: 162
 Connection: keep-alive
@@ -177,7 +177,7 @@ Connection: keep-alive
   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0   162    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
 HTTP/1.1 404 Not Found
 Server: nginx/1.24.0 (Ubuntu)
-Date: Sat, 13 Jun 2026 21:39:24 GMT
+Date: Sat, 13 Jun 2026 21:39:23 GMT
 Content-Type: text/html
 Content-Length: 162
 Connection: keep-alive
@@ -193,7 +193,7 @@ Connection: keep-alive
   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0   162    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
 HTTP/1.1 404 Not Found
 Server: nginx/1.24.0 (Ubuntu)
-Date: Sat, 13 Jun 2026 21:39:24 GMT
+Date: Sat, 13 Jun 2026 21:39:23 GMT
 Content-Type: text/html
 Content-Length: 162
 Connection: keep-alive
@@ -209,7 +209,7 @@ Connection: keep-alive
   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0   162    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
 HTTP/1.1 404 Not Found
 Server: nginx/1.24.0 (Ubuntu)
-Date: Sat, 13 Jun 2026 21:39:24 GMT
+Date: Sat, 13 Jun 2026 21:39:23 GMT
 Content-Type: text/html
 Content-Length: 162
 Connection: keep-alive
@@ -225,7 +225,7 @@ Connection: keep-alive
   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0   162    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
 HTTP/1.1 404 Not Found
 Server: nginx/1.24.0 (Ubuntu)
-Date: Sat, 13 Jun 2026 21:39:24 GMT
+Date: Sat, 13 Jun 2026 21:39:23 GMT
 Content-Type: text/html
 Content-Length: 162
 Connection: keep-alive
@@ -238,10 +238,10 @@ Connection: keep-alive
 + curl -I --max-time 10 http://jhunaey.my.id/ || true
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
-  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0   178    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0   178    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
 HTTP/1.1 301 Moved Permanently
 Server: nginx/1.24.0 (Ubuntu)
-Date: Sat, 13 Jun 2026 21:39:24 GMT
+Date: Sat, 13 Jun 2026 21:39:23 GMT
 Content-Type: text/html
 Content-Length: 178
 Connection: keep-alive
@@ -258,7 +258,7 @@ Location: https://jhunaey.my.id/
   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0 11455    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
 HTTP/1.1 200 OK
 Server: nginx/1.24.0 (Ubuntu)
-Date: Sat, 13 Jun 2026 21:39:24 GMT
+Date: Sat, 13 Jun 2026 21:39:23 GMT
 Content-Type: text/html
 Content-Length: 11455
 Last-Modified: Sat, 13 Jun 2026 15:11:02 GMT
@@ -277,7 +277,7 @@ Accept-Ranges: bytes
   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0   162    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
 HTTP/1.1 404 Not Found
 Server: nginx/1.24.0 (Ubuntu)
-Date: Sat, 13 Jun 2026 21:39:24 GMT
+Date: Sat, 13 Jun 2026 21:39:23 GMT
 Content-Type: text/html
 Content-Length: 162
 Connection: keep-alive
