@@ -1,0 +1,184 @@
+== 1. STRUKTUR VPS-FIRST ==
+PASS | index.html ada di web root
+PASS | folder data/ ada
+PASS | data mentah JSON ada
+PASS | folder data/generated/ ada
+PASS | folder server/ ada
+PASS | folder logs/ ada
+\n== 2. NODE ANALYZER ==
+PASS | server/analyze.js ada
+PASS | server/run_analysis.sh ada
+PASS | server/supermax_finalize.js ada
+PASS | Node.js tersedia
+\n== 3. FRONTEND BACA JSON GENERATED ==
+FAIL | index.html tidak terlihat membaca data/generated
+PASS | index.html tidak menyebut data mentah langsung
+\n== 4. OUTPUT JSON WAJIB ==
+PASS | data/generated/manifest.json ada
+PASS | data/generated/markets.json ada
+PASS | data/generated/latest_bbfs_7digit.json ada
+PASS | data/generated/latest_bbfs_2d_candidates.json ada
+PASS | data/generated/latest_bbfs_3d_candidates.json ada
+PASS | data/generated/latest_bbfs_audit.json ada
+PASS | data/generated/latest_prediction_gate.json ada
+PASS | data/generated/latest_prediction_readiness.json ada
+PASS | data/generated/latest_backtest.json ada
+PASS | data/generated/latest_rolling_validation.json ada
+PASS | data/generated/latest_holdout_recent_test.json ada
+PASS | data/generated/latest_super_max_summary.json ada
+PASS | data/generated/latest_prediction_run_audit.json ada
+\n== 5. BBFS 7 DIGIT UTAMA ==
+PASS | manifest: bbfs_enabled=true
+PASS | manifest: display_mode BBFS_7_DIGIT_UTAMA
+PASS | latest_bbfs_7digit.json tersedia
+\n== 6. WEB ACCESS DAN PROTEKSI ==
+PASS | HTTPS root 200
+PASS | manifest public 200
+PASS | markets public 200
+PASS | server/ terlindungi 403
+PASS | logs/ terlindungi 403
+PASS | data mentah terlindungi 403
+\n== 7. LARANGAN EKSTERNAL FRONTEND ==
+WARN | Ditemukan referensi eksternal di frontend/assets; lihat baris di laporan
+PASS | Tidak ada script/link eksternal eksplisit di index.html
+PASS | localStorage tidak ditemukan
+\n== 8. DATABASE/API/SCRAPING ==
+PASS | Tidak ada proses database umum berjalan
+WARN | Ada fetch/request di kode; cek apakah hanya fetch JSON lokal
+\n== 9. PROSES BERAT DAN CRON ==
+PASS | Tidak ada proses SuperMax/analyzer berat berjalan
+PASS | Tidak ada cron analyzer berat di root
+\n== 10. DISCLAIMER / NO CLAIM PASTI ==
+PASS | Teks disclaimer/statistik ditemukan
+\n== SUMMARY ==
+PASS=39
+WARN=2
+FAIL=1
+TEXT_CROSS_CHECK_STATUS=NEEDS_REVIEW
+== 1. STRUKTUR VPS-FIRST ==
+PASS | index.html ada di web root
+PASS | folder data/ ada
+PASS | data mentah JSON ada
+PASS | folder data/generated/ ada
+PASS | folder server/ ada
+PASS | folder logs/ ada
+\n== 2. NODE ANALYZER ==
+PASS | server/analyze.js ada
+PASS | server/run_analysis.sh ada
+PASS | server/supermax_finalize.js ada
+PASS | Node.js tersedia
+\n== 3. FRONTEND BACA JSON GENERATED ==
+FAIL | index.html tidak terlihat membaca data/generated
+PASS | index.html tidak menyebut data mentah langsung
+\n== 4. OUTPUT JSON WAJIB ==
+PASS | data/generated/manifest.json ada
+PASS | data/generated/markets.json ada
+PASS | data/generated/latest_bbfs_7digit.json ada
+PASS | data/generated/latest_bbfs_2d_candidates.json ada
+PASS | data/generated/latest_bbfs_3d_candidates.json ada
+PASS | data/generated/latest_bbfs_audit.json ada
+PASS | data/generated/latest_prediction_gate.json ada
+PASS | data/generated/latest_prediction_readiness.json ada
+PASS | data/generated/latest_backtest.json ada
+PASS | data/generated/latest_rolling_validation.json ada
+PASS | data/generated/latest_holdout_recent_test.json ada
+PASS | data/generated/latest_super_max_summary.json ada
+PASS | data/generated/latest_prediction_run_audit.json ada
+\n== 5. BBFS 7 DIGIT UTAMA ==
+PASS | manifest: bbfs_enabled=true
+PASS | manifest: display_mode BBFS_7_DIGIT_UTAMA
+PASS | latest_bbfs_7digit.json tersedia
+\n== 6. WEB ACCESS DAN PROTEKSI ==
+PASS | HTTPS root 200
+PASS | manifest public 200
+PASS | markets public 200
+PASS | server/ terlindungi 403
+PASS | logs/ terlindungi 403
+PASS | data mentah terlindungi 403
+\n== 7. LARANGAN EKSTERNAL FRONTEND ==
+WARN | Ditemukan referensi eksternal di frontend/assets; lihat baris di laporan
+PASS | Tidak ada script/link eksternal eksplisit di index.html
+PASS | localStorage tidak ditemukan
+\n== 8. DATABASE/API/SCRAPING ==
+PASS | Tidak ada proses database umum berjalan
+WARN | Ada fetch/request di kode; cek apakah hanya fetch JSON lokal
+\n== 9. PROSES BERAT DAN CRON ==
+PASS | Tidak ada proses SuperMax/analyzer berat berjalan
+PASS | Tidak ada cron analyzer berat di root
+\n== 10. DISCLAIMER / NO CLAIM PASTI ==
+PASS | Teks disclaimer/statistik ditemukan
+\n== SUMMARY ==
+PASS=39
+WARN=2
+FAIL=1
+TEXT_CROSS_CHECK_STATUS=NEEDS_REVIEW
+\n== 8. DATABASE/API/SCRAPING ==
+PASS | Tidak ada proses database umum berjalan
+WARN | Ada fetch/request di kode; cek apakah hanya fetch JSON lokal
+\n== 9. PROSES BERAT DAN CRON ==
+PASS | Tidak ada proses SuperMax/analyzer berat berjalan
+PASS | Tidak ada cron analyzer berat di root
+\n== 10. DISCLAIMER / NO CLAIM PASTI ==
+PASS | Teks disclaimer/statistik ditemukan
+\n== SUMMARY ==
+PASS=39
+WARN=2
+FAIL=1
+TEXT_CROSS_CHECK_STATUS=NEEDS_REVIEW
+ted
+PASS | index.html tidak menyebut data mentah langsung
+\n== 4. OUTPUT JSON WAJIB ==
+PASS | data/generated/manifest.json ada
+PASS | data/generated/markets.json ada
+PASS | data/generated/latest_bbfs_7digit.json ada
+PASS | data/generated/latest_bbfs_2d_candidates.json ada
+PASS | data/generated/latest_bbfs_3d_candidates.json ada
+PASS | data/generated/latest_bbfs_audit.json ada
+PASS | data/generated/latest_prediction_gate.json ada
+PASS | data/generated/latest_prediction_readiness.json ada
+PASS | data/generated/latest_backtest.json ada
+PASS | data/generated/latest_rolling_validation.json ada
+PASS | data/generated/latest_holdout_recent_test.json ada
+PASS | data/generated/latest_super_max_summary.json ada
+PASS | data/generated/latest_prediction_run_audit.json ada
+\n== 5. BBFS 7 DIGIT UTAMA ==
+PASS | manifest: bbfs_enabled=true
+PASS | manifest: display_mode BBFS_7_DIGIT_UTAMA
+PASS | latest_bbfs_7digit.json tersedia
+\n== 6. WEB ACCESS DAN PROTEKSI ==
+PASS | HTTPS root 200
+PASS | manifest public 200
+PASS | markets public 200
+PASS | server/ terlindungi 403
+PASS | logs/ terlindungi 403
+PASS | data mentah terlindungi 403
+\n== 7. LARANGAN EKSTERNAL FRONTEND ==
+WARN | Ditemukan referensi eksternal di frontend/assets; lihat baris di laporan
+PASS | Tidak ada script/link eksternal eksplisit di index.html
+PASS | localStorage tidak ditemukan
+\n== 8. DATABASE/API/SCRAPING ==
+PASS | Tidak ada proses database umum berjalan
+WARN | Ada fetch/request di kode; cek apakah hanya fetch JSON lokal
+\n== 9. PROSES BERAT DAN CRON ==
+PASS | Tidak ada proses SuperMax/analyzer berat berjalan
+PASS | Tidak ada cron analyzer berat di root
+\n== 10. DISCLAIMER / NO CLAIM PASTI ==
+PASS | Teks disclaimer/statistik ditemukan
+\n== SUMMARY ==
+PASS=39
+WARN=2
+FAIL=1
+TEXT_CROSS_CHECK_STATUS=NEEDS_REVIEW
+\n== 8. DATABASE/API/SCRAPING ==
+PASS | Tidak ada proses database umum berjalan
+WARN | Ada fetch/request di kode; cek apakah hanya fetch JSON lokal
+\n== 9. PROSES BERAT DAN CRON ==
+PASS | Tidak ada proses SuperMax/analyzer berat berjalan
+PASS | Tidak ada cron analyzer berat di root
+\n== 10. DISCLAIMER / NO CLAIM PASTI ==
+PASS | Teks disclaimer/statistik ditemukan
+\n== SUMMARY ==
+PASS=39
+WARN=2
+FAIL=1
+TEXT_CROSS_CHECK_STATUS=NEEDS_REVIEW
