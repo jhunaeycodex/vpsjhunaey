@@ -42,6 +42,12 @@ http_code() {
   curl -k -sS -o /dev/null -w "%{http_code}" --max-time 10 "$url" 2>/dev/null || true
 }
 
+http_code_host() {
+  local url="$1"
+  local host="$2"
+  curl -k -sS -o /dev/null -w "%{http_code}" -H "Host: $host" --max-time 10 "$url" 2>/dev/null || true
+}
+
 {
   echo "VPS JHUNAEY STATUS REPORT"
   echo "generated_at=$(date -Is)"
@@ -60,19 +66,25 @@ run_cmd "NODE VERSION" "node -v 2>/dev/null || true; npm -v 2>/dev/null || true"
 run_cmd "NGINX STATUS" "systemctl is-active nginx || true; systemctl status nginx --no-pager -l || true"
 run_cmd "NGINX TEST" "nginx -t"
 run_cmd "PORT LISTEN" "ss -ltnp | grep -E ':80|:443|nginx' || true"
-run_cmd "NGINX ACTIVE CONFIG SUMMARY" "nginx -T 2>/dev/null | grep -nE 'server_name|listen|root |location|return 403|deny all' || true"
+run_cmd "NGINX ACTIVE CONFIG SUMMARY" "nginx -T 2>/dev/null | grep -nE 'server_name|listen|root |location|return 403|deny all|ssl_certificate|managed by Certbot' || true"
 
 run_cmd "DNS RESOLUTION" "getent hosts $DOMAIN || true; getent hosts www.$DOMAIN || true"
 
-run_cmd "HTTP LOCAL ROOT" "curl -I --max-time 10 http://127.0.0.1/ || true"
-run_cmd "HTTP LOCAL GENERATED MANIFEST" "curl -I --max-time 10 http://127.0.0.1/data/generated/manifest.json || true"
-run_cmd "HTTP LOCAL GENERATED MARKETS" "curl -I --max-time 10 http://127.0.0.1/data/generated/markets.json || true"
-run_cmd "HTTP LOCAL PROTECTED SERVER" "curl -I --max-time 10 http://127.0.0.1/server/ || true"
-run_cmd "HTTP LOCAL PROTECTED LOGS" "curl -I --max-time 10 http://127.0.0.1/logs/ || true"
-run_cmd "HTTP LOCAL PROTECTED RAW DATA" "curl -I --max-time 10 http://127.0.0.1/data/all_results_from_source_file.json || true"
+run_cmd "HTTP LOCAL 127 WITHOUT HOST" "curl -I --max-time 10 http://127.0.0.1/ || true"
+run_cmd "HTTP LOCAL 127 WITH DOMAIN HOST" "curl -I -H 'Host: $DOMAIN' --max-time 10 http://127.0.0.1/ || true"
+run_cmd "HTTP LOCAL 127 MANIFEST WITH DOMAIN HOST" "curl -I -H 'Host: $DOMAIN' --max-time 10 http://127.0.0.1/data/generated/manifest.json || true"
+run_cmd "HTTP LOCAL 127 MARKETS WITH DOMAIN HOST" "curl -I -H 'Host: $DOMAIN' --max-time 10 http://127.0.0.1/data/generated/markets.json || true"
+run_cmd "HTTP LOCAL 127 PROTECTED SERVER WITH DOMAIN HOST" "curl -I -H 'Host: $DOMAIN' --max-time 10 http://127.0.0.1/server/ || true"
+run_cmd "HTTP LOCAL 127 PROTECTED LOGS WITH DOMAIN HOST" "curl -I -H 'Host: $DOMAIN' --max-time 10 http://127.0.0.1/logs/ || true"
+run_cmd "HTTP LOCAL 127 PROTECTED RAW DATA WITH DOMAIN HOST" "curl -I -H 'Host: $DOMAIN' --max-time 10 http://127.0.0.1/data/all_results_from_source_file.json || true"
 
 run_cmd "HTTP DOMAIN ROOT" "curl -I --max-time 10 http://$DOMAIN/ || true"
 run_cmd "HTTPS DOMAIN ROOT" "curl -k -I --max-time 10 https://$DOMAIN/ || true"
+run_cmd "HTTPS DOMAIN MANIFEST" "curl -k -I --max-time 10 https://$DOMAIN/data/generated/manifest.json || true"
+run_cmd "HTTPS DOMAIN MARKETS" "curl -k -I --max-time 10 https://$DOMAIN/data/generated/markets.json || true"
+run_cmd "HTTPS DOMAIN PROTECTED SERVER" "curl -k -I --max-time 10 https://$DOMAIN/server/ || true"
+run_cmd "HTTPS DOMAIN PROTECTED LOGS" "curl -k -I --max-time 10 https://$DOMAIN/logs/ || true"
+run_cmd "HTTPS DOMAIN PROTECTED RAW DATA" "curl -k -I --max-time 10 https://$DOMAIN/data/all_results_from_source_file.json || true"
 run_cmd "HTTP IP ROOT" "curl -I --max-time 10 http://$IP_ADDR/ || true"
 
 run_cmd "WEB ROOT LIST" "ls -lah $WEB_ROOT || true"
@@ -90,39 +102,51 @@ run_cmd "PROCESS CHECK" "ps aux | grep -E 'analyze|run_analysis|supermax|node|ng
 run_cmd "CRON ROOT" "crontab -l 2>/dev/null || true"
 run_cmd "JOURNAL NGINX LAST 80" "journalctl -u nginx -n 80 --no-pager 2>/dev/null || true"
 
-LOCAL_ROOT_CODE="$(http_code http://127.0.0.1/)"
-MANIFEST_CODE="$(http_code http://127.0.0.1/data/generated/manifest.json)"
-MARKETS_CODE="$(http_code http://127.0.0.1/data/generated/markets.json)"
-SERVER_CODE="$(http_code http://127.0.0.1/server/)"
-LOGS_CODE="$(http_code http://127.0.0.1/logs/)"
-RAW_CODE="$(http_code http://127.0.0.1/data/all_results_from_source_file.json)"
-DOMAIN_CODE="$(http_code http://$DOMAIN/)"
-HTTPS_CODE="$(http_code https://$DOMAIN/)"
+LOCAL_HOST_ROOT_CODE="$(http_code_host http://127.0.0.1/ "$DOMAIN")"
+LOCAL_HOST_MANIFEST_CODE="$(http_code_host http://127.0.0.1/data/generated/manifest.json "$DOMAIN")"
+LOCAL_HOST_MARKETS_CODE="$(http_code_host http://127.0.0.1/data/generated/markets.json "$DOMAIN")"
+LOCAL_HOST_SERVER_CODE="$(http_code_host http://127.0.0.1/server/ "$DOMAIN")"
+LOCAL_HOST_LOGS_CODE="$(http_code_host http://127.0.0.1/logs/ "$DOMAIN")"
+LOCAL_HOST_RAW_CODE="$(http_code_host http://127.0.0.1/data/all_results_from_source_file.json "$DOMAIN")"
+
+DOMAIN_HTTP_CODE="$(http_code http://$DOMAIN/)"
+DOMAIN_HTTPS_CODE="$(http_code https://$DOMAIN/)"
+HTTPS_MANIFEST_CODE="$(http_code https://$DOMAIN/data/generated/manifest.json)"
+HTTPS_MARKETS_CODE="$(http_code https://$DOMAIN/data/generated/markets.json)"
+HTTPS_SERVER_CODE="$(http_code https://$DOMAIN/server/)"
+HTTPS_LOGS_CODE="$(http_code https://$DOMAIN/logs/)"
+HTTPS_RAW_CODE="$(http_code https://$DOMAIN/data/all_results_from_source_file.json)"
 
 {
   echo
   echo "================================================================"
   echo "## SUMMARY"
   echo "================================================================"
-  echo "local_root_http=$LOCAL_ROOT_CODE"
-  echo "manifest_http=$MANIFEST_CODE"
-  echo "markets_http=$MARKETS_CODE"
-  echo "server_protection_http=$SERVER_CODE"
-  echo "logs_protection_http=$LOGS_CODE"
-  echo "raw_data_protection_http=$RAW_CODE"
-  echo "domain_http=$DOMAIN_CODE"
-  echo "domain_https=$HTTPS_CODE"
+  echo "local_host_root_http=$LOCAL_HOST_ROOT_CODE"
+  echo "local_host_manifest_http=$LOCAL_HOST_MANIFEST_CODE"
+  echo "local_host_markets_http=$LOCAL_HOST_MARKETS_CODE"
+  echo "local_host_server_protection_http=$LOCAL_HOST_SERVER_CODE"
+  echo "local_host_logs_protection_http=$LOCAL_HOST_LOGS_CODE"
+  echo "local_host_raw_data_protection_http=$LOCAL_HOST_RAW_CODE"
+  echo "domain_http=$DOMAIN_HTTP_CODE"
+  echo "domain_https=$DOMAIN_HTTPS_CODE"
+  echo "https_manifest=$HTTPS_MANIFEST_CODE"
+  echo "https_markets=$HTTPS_MARKETS_CODE"
+  echo "https_server_protection=$HTTPS_SERVER_CODE"
+  echo "https_logs_protection=$HTTPS_LOGS_CODE"
+  echo "https_raw_data_protection=$HTTPS_RAW_CODE"
   echo
-  echo "EXPECTED:"
-  echo "local_root_http=200"
-  echo "manifest_http=200"
-  echo "markets_http=200"
-  echo "server_protection_http=403"
-  echo "logs_protection_http=403"
-  echo "raw_data_protection_http=403"
+  echo "EXPECTED HTTPS MODE:"
+  echo "domain_http=301 or 200"
+  echo "domain_https=200"
+  echo "https_manifest=200"
+  echo "https_markets=200"
+  echo "https_server_protection=403"
+  echo "https_logs_protection=403"
+  echo "https_raw_data_protection=403"
   echo
-  if [ "$LOCAL_ROOT_CODE" = "200" ] && [ "$MANIFEST_CODE" = "200" ] && [ "$MARKETS_CODE" = "200" ] && [ "$SERVER_CODE" = "403" ] && [ "$LOGS_CODE" = "403" ] && [ "$RAW_CODE" = "403" ]; then
-    echo "INSTALLATION_STATUS=OK_LIGHT_CHECK"
+  if { [ "$DOMAIN_HTTP_CODE" = "301" ] || [ "$DOMAIN_HTTP_CODE" = "200" ]; } && [ "$DOMAIN_HTTPS_CODE" = "200" ] && [ "$HTTPS_MANIFEST_CODE" = "200" ] && [ "$HTTPS_MARKETS_CODE" = "200" ] && [ "$HTTPS_SERVER_CODE" = "403" ] && [ "$HTTPS_LOGS_CODE" = "403" ] && [ "$HTTPS_RAW_CODE" = "403" ]; then
+    echo "INSTALLATION_STATUS=OK_HTTPS_CHECK"
   else
     echo "INSTALLATION_STATUS=NEEDS_REVIEW"
   fi
