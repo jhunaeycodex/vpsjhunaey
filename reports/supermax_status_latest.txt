@@ -1,15 +1,19 @@
 SUPERMAX STATUS
-generated_at=2026-06-14T06:11:11+07:00
+generated_at=2026-06-14T06:35:56+07:00
 web_root=/var/www/html/prediksi
 
 == PROCESS ==
+root       28807  0.0  0.7  16904  7480 pts/0    SN   06:35   0:00 sudo -u www-data ./server/run_analysis.sh super-max --bbfs
+root       28809  0.0  0.2  16904  2528 pts/1    SNs+ 06:35   0:00 sudo -u www-data ./server/run_analysis.sh super-max --bbfs
+www-data   28810  0.0  0.3   7340  3704 pts/1    SN   06:35   0:00 /bin/bash ./server/run_analysis.sh super-max --bbfs
+www-data   28818 97.5 13.1 1072596 129576 pts/1  RNl  06:35   0:29 node /var/www/html/prediksi/server/analyze.js --mode=super-max --bbfs
 
 == PID FILE ==
-missing
+28807
 
 == MEMORY ==
                total        used        free      shared  buff/cache   available
-Mem:           961Mi       380Mi       315Mi       2.6Mi       428Mi       580Mi
+Mem:           961Mi       494Mi       196Mi       2.6Mi       434Mi       466Mi
 Swap:          2.0Gi          0B       2.0Gi
 
 == DISK ==
@@ -18,7 +22,17 @@ Filesystem      Size  Used Avail Use% Mounted on
 /dev/sda3        20G  5.9G   15G  30% /
 
 == LOG TAIL ==
-missing /var/www/html/prediksi/logs/supermax.log
+started_at=2026-06-14T06:35:26+07:00
+command=nice -n 10 ionice -c2 -n7 sudo -u www-data ./server/run_analysis.sh super-max --bbfs
+
+[2026-06-14T06:35:26+07:00] Starting VPS analysis mode=super-max bbfs=--bbfs
+[2026-06-13T23:35:26.418Z] === ANALYZER START === mode=super-max bbfs=true
+[2026-06-13T23:35:26.421Z] Loading input data...
+[2026-06-13T23:35:26.748Z] Loaded 86933 records. Hash: 4708e8a7fc7ca728
+[2026-06-13T23:35:26.748Z] Validating and grouping data...
+[2026-06-13T23:35:27.119Z] Markets to analyze: 57
+[2026-06-13T23:35:27.121Z] Analyzing market: BULLSEYE (1616 records)
+[2026-06-13T23:35:27.122Z]   BULLSEYE: running preset selection (20 presets × 2D+3D)
 
 == GENERATED FILE TIMES ==
 total 3.1M
