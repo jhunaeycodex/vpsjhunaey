@@ -1,0 +1,72 @@
+=== SUPERMAX PREPARE ===
+2026-06-14T04:43:57+07:00
+
+[1/8] Check required files
+OK: index.html
+OK: data/all_results_from_source_file.json
+OK: data/generated/manifest.json
+OK: data/generated/markets.json
+OK: server/analyze.js
+OK: server/run_analysis.sh
+OK: server/supermax_finalize.js
+
+[2/8] Check Node
+v22.22.3
+10.9.8
+
+[3/8] Check current memory
+               total        used        free      shared  buff/cache   available
+Mem:           961Mi       422Mi       283Mi       2.5Mi       419Mi       539Mi
+Swap:             0B          0B          0B
+
+[4/8] Ensure swap exists
+No swap active. Creating /swapfile size 2G ...
+Setting up swapspace version 1, size = 2 GiB (2147479552 bytes)
+no label, UUID=a594314b-256c-47e8-93b4-0c1ce80e8a7c
+Swap activated:
+NAME      TYPE SIZE USED PRIO
+/swapfile file   2G   0B   -2
+
+[5/8] Ensure permissions
+
+[6/8] Create backup of current generated output
+-rw-r--r-- 1 root root 273K Jun 14 04:43 /var/www/html/prediksi/backups/generated/generated_20260614_044358.tar.gz
+
+[7/8] Check stale analysis lock
+Analysis-related process found:
+24863 bash scripts/supermax_prepare.sh
+24864 tee reports/supermax_prepare_latest.txt
+Do not start a new run until this is reviewed.
+
+[8/8] Final lightweight web check
+HTTP/1.1 200 OK
+Server: nginx/1.24.0 (Ubuntu)
+Date: Sat, 13 Jun 2026 21:43:58 GMT
+Content-Type: text/html
+Content-Length: 11455
+Last-Modified: Sat, 13 Jun 2026 15:11:02 GMT
+Connection: keep-alive
+ETag: "6a2d7306-2cbf"
+Accept-Ranges: bytes
+
+HTTP/1.1 200 OK
+Server: nginx/1.24.0 (Ubuntu)
+Date: Sat, 13 Jun 2026 21:43:58 GMT
+Content-Type: application/json
+Content-Length: 580
+Last-Modified: Sat, 13 Jun 2026 15:44:09 GMT
+Connection: keep-alive
+ETag: "6a2d7ac9-244"
+Cache-Control: no-store, no-cache, must-revalidate, proxy-revalidate
+Accept-Ranges: bytes
+
+HTTP/1.1 403 Forbidden
+Server: nginx/1.24.0 (Ubuntu)
+Date: Sat, 13 Jun 2026 21:43:58 GMT
+Content-Type: text/html
+Content-Length: 162
+Connection: keep-alive
+
+
+PREPARE_STATUS=OK
+Next, run scripts/supermax_start.sh only when you intentionally want to start the heavy SuperMax run.
