@@ -1,0 +1,583 @@
+VPS JHUNAEY STATUS REPORT
+generated_at=2026-06-14T04:23:36+07:00
+web_root=/var/www/html/prediksi
+domain=jhunaey.my.id
+ip=202.155.95.27
+user=root
+hostname=jhunaey
+pwd=/root/vpsjhunaey
+
+================================================================
+## SYSTEM
+================================================================
++ date -Is; hostnamectl 2>/dev/null || true; uname -a; uptime; whoami; id
+2026-06-14T04:23:36+07:00
+ Static hostname: jhunaey
+       Icon name: computer-vm
+         Chassis: vm 🖴
+      Machine ID: 41a45f1b499044b68feddb54840c2c1b
+         Boot ID: a74e3d6afcd44bba87575b831793eab6
+  Virtualization: kvm
+Operating System: Ubuntu 24.04.4 LTS
+          Kernel: Linux 6.8.0-111-generic
+    Architecture: x86-64
+ Hardware Vendor: Red Hat
+  Hardware Model: KVM
+Firmware Version: 1.16.0-4.module_el8.9.0+3659+9c8643f3
+   Firmware Date: Tue 2014-04-01
+    Firmware Age: 12y 2month 1w 6d
+Linux jhunaey 6.8.0-111-generic #111-Ubuntu SMP PREEMPT_DYNAMIC Sat Apr 11 23:16:02 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
+ 04:23:36 up  6:19,  5 users,  load average: 0.10, 0.03, 0.01
+root
+uid=0(root) gid=0(root) groups=0(root)
+[exit_code=0]
+
+================================================================
+## DISK AND MEMORY
+================================================================
++ df -h; echo; free -h
+Filesystem      Size  Used Avail Use% Mounted on
+tmpfs            97M  1.1M   96M   2% /run
+/dev/sda3        20G  3.8G   17G  20% /
+tmpfs           481M     0  481M   0% /dev/shm
+tmpfs           5.0M     0  5.0M   0% /run/lock
+tmpfs           481M     0  481M   0% /run/qemu
+/dev/sda2       110M   512  110M   1% /boot/efi
+tmpfs            97M  8.0K   97M   1% /run/user/0
+
+               total        used        free      shared  buff/cache   available
+Mem:           961Mi       397Mi       258Mi       2.4Mi       475Mi       564Mi
+Swap:             0B          0B          0B
+[exit_code=0]
+
+================================================================
+## NODE VERSION
+================================================================
++ node -v 2>/dev/null || true; npm -v 2>/dev/null || true
+v22.22.3
+10.9.8
+[exit_code=0]
+
+================================================================
+## NGINX STATUS
+================================================================
++ systemctl is-active nginx || true; systemctl status nginx --no-pager -l || true
+active
+● nginx.service - A high performance web server and a reverse proxy server
+     Loaded: loaded (/usr/lib/systemd/system/nginx.service; enabled; preset: enabled)
+     Active: active (running) since Sun 2026-06-14 04:07:08 WIB; 16min ago
+       Docs: man:nginx(8)
+    Process: 22830 ExecStartPre=/usr/sbin/nginx -t -q -g daemon on; master_process on; (code=exited, status=0/SUCCESS)
+    Process: 22833 ExecStart=/usr/sbin/nginx -g daemon on; master_process on; (code=exited, status=0/SUCCESS)
+    Process: 22908 ExecReload=/usr/sbin/nginx -g daemon on; master_process on; -s reload (code=exited, status=0/SUCCESS)
+   Main PID: 22834 (nginx)
+      Tasks: 2 (limit: 1055)
+     Memory: 2.6M (peak: 4.4M)
+        CPU: 250ms
+     CGroup: /system.slice/nginx.service
+             ├─22834 "nginx: master process /usr/sbin/nginx -g daemon on; master_process on;"
+             └─22910 "nginx: worker process"
+
+Jun 14 04:07:08 jhunaey systemd[1]: Starting nginx.service - A high performance web server and a reverse proxy server...
+Jun 14 04:07:08 jhunaey systemd[1]: Started nginx.service - A high performance web server and a reverse proxy server.
+Jun 14 04:16:23 jhunaey systemd[1]: Reloading nginx.service - A high performance web server and a reverse proxy server...
+Jun 14 04:16:23 jhunaey nginx[22908]: 2026/06/14 04:16:23 [notice] 22908#22908: signal process started
+Jun 14 04:16:23 jhunaey systemd[1]: Reloaded nginx.service - A high performance web server and a reverse proxy server.
+[exit_code=0]
+
+================================================================
+## NGINX TEST
+================================================================
++ nginx -t
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+[exit_code=0]
+
+================================================================
+## PORT LISTEN
+================================================================
++ ss -ltnp | grep -E ':80|:443|nginx' || true
+LISTEN 0      511          0.0.0.0:80        0.0.0.0:*    users:(("nginx",pid=22910,fd=5),("nginx",pid=22834,fd=5))
+LISTEN 0      511             [::]:80           [::]:*    users:(("nginx",pid=22910,fd=6),("nginx",pid=22834,fd=6))
+[exit_code=0]
+
+================================================================
+## NGINX ACTIVE CONFIG SUMMARY
+================================================================
++ nginx -T 2>/dev/null | grep -nE 'server_name|listen|root |location|return 403|deny all' || true
+24:	# server_names_hash_bucket_size 64;
+25:	# server_name_in_redirect off;
+74:#		listen     localhost:110;
+80:#		listen     localhost:143;
+191:    listen 80 default_server;
+192:    listen [::]:80 default_server;
+194:    server_name jhunaey.my.id www.jhunaey.my.id 202.155.95.27 _;
+196:    root /var/www/html/prediksi;
+199:    location / {
+203:    location ^~ /server/ {
+204:        return 403;
+207:    location ^~ /logs/ {
+208:        return 403;
+211:    location = /data/all_results_from_source_file.json {
+212:        return 403;
+215:    location ~* \.json$ {
+[exit_code=0]
+
+================================================================
+## DNS RESOLUTION
+================================================================
++ getent hosts jhunaey.my.id || true; getent hosts www.jhunaey.my.id || true
+202.155.95.27   jhunaey.my.id
+202.155.95.27   www.jhunaey.my.id
+[exit_code=0]
+
+================================================================
+## HTTP LOCAL ROOT
+================================================================
++ curl -I --max-time 10 http://127.0.0.1/ || true
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0 11455    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+HTTP/1.1 200 OK
+Server: nginx/1.24.0 (Ubuntu)
+Date: Sat, 13 Jun 2026 21:23:36 GMT
+Content-Type: text/html
+Content-Length: 11455
+Last-Modified: Sat, 13 Jun 2026 15:11:02 GMT
+Connection: keep-alive
+ETag: "6a2d7306-2cbf"
+Accept-Ranges: bytes
+
+[exit_code=0]
+
+================================================================
+## HTTP LOCAL GENERATED MANIFEST
+================================================================
++ curl -I --max-time 10 http://127.0.0.1/data/generated/manifest.json || true
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0   580    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+HTTP/1.1 200 OK
+Server: nginx/1.24.0 (Ubuntu)
+Date: Sat, 13 Jun 2026 21:23:36 GMT
+Content-Type: application/json
+Content-Length: 580
+Last-Modified: Sat, 13 Jun 2026 15:44:09 GMT
+Connection: keep-alive
+ETag: "6a2d7ac9-244"
+Cache-Control: no-store, no-cache, must-revalidate, proxy-revalidate
+Accept-Ranges: bytes
+
+[exit_code=0]
+
+================================================================
+## HTTP LOCAL GENERATED MARKETS
+================================================================
++ curl -I --max-time 10 http://127.0.0.1/data/generated/markets.json || true
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0 28314    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+HTTP/1.1 200 OK
+Server: nginx/1.24.0 (Ubuntu)
+Date: Sat, 13 Jun 2026 21:23:36 GMT
+Content-Type: application/json
+Content-Length: 28314
+Last-Modified: Sat, 13 Jun 2026 15:11:20 GMT
+Connection: keep-alive
+ETag: "6a2d7318-6e9a"
+Cache-Control: no-store, no-cache, must-revalidate, proxy-revalidate
+Accept-Ranges: bytes
+
+[exit_code=0]
+
+================================================================
+## HTTP LOCAL PROTECTED SERVER
+================================================================
++ curl -I --max-time 10 http://127.0.0.1/server/ || true
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0   162    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+HTTP/1.1 403 Forbidden
+Server: nginx/1.24.0 (Ubuntu)
+Date: Sat, 13 Jun 2026 21:23:36 GMT
+Content-Type: text/html
+Content-Length: 162
+Connection: keep-alive
+
+[exit_code=0]
+
+================================================================
+## HTTP LOCAL PROTECTED LOGS
+================================================================
++ curl -I --max-time 10 http://127.0.0.1/logs/ || true
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0   162    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+HTTP/1.1 403 Forbidden
+Server: nginx/1.24.0 (Ubuntu)
+Date: Sat, 13 Jun 2026 21:23:36 GMT
+Content-Type: text/html
+Content-Length: 162
+Connection: keep-alive
+
+[exit_code=0]
+
+================================================================
+## HTTP LOCAL PROTECTED RAW DATA
+================================================================
++ curl -I --max-time 10 http://127.0.0.1/data/all_results_from_source_file.json || true
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0   162    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+HTTP/1.1 403 Forbidden
+Server: nginx/1.24.0 (Ubuntu)
+Date: Sat, 13 Jun 2026 21:23:37 GMT
+Content-Type: text/html
+Content-Length: 162
+Connection: keep-alive
+
+[exit_code=0]
+
+================================================================
+## HTTP DOMAIN ROOT
+================================================================
++ curl -I --max-time 10 http://jhunaey.my.id/ || true
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0 11455    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+HTTP/1.1 200 OK
+Server: nginx/1.24.0 (Ubuntu)
+Date: Sat, 13 Jun 2026 21:23:37 GMT
+Content-Type: text/html
+Content-Length: 11455
+Last-Modified: Sat, 13 Jun 2026 15:11:02 GMT
+Connection: keep-alive
+ETag: "6a2d7306-2cbf"
+Accept-Ranges: bytes
+
+[exit_code=0]
+
+================================================================
+## HTTPS DOMAIN ROOT
+================================================================
++ curl -k -I --max-time 10 https://jhunaey.my.id/ || true
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+curl: (7) Failed to connect to jhunaey.my.id port 443 after 45 ms: Couldn't connect to server
+[exit_code=0]
+
+================================================================
+## HTTP IP ROOT
+================================================================
++ curl -I --max-time 10 http://202.155.95.27/ || true
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0 11455    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+HTTP/1.1 200 OK
+Server: nginx/1.24.0 (Ubuntu)
+Date: Sat, 13 Jun 2026 21:23:37 GMT
+Content-Type: text/html
+Content-Length: 11455
+Last-Modified: Sat, 13 Jun 2026 15:11:02 GMT
+Connection: keep-alive
+ETag: "6a2d7306-2cbf"
+Accept-Ranges: bytes
+
+[exit_code=0]
+
+================================================================
+## WEB ROOT LIST
+================================================================
++ ls -lah /var/www/html/prediksi || true
+total 36K
+drwxr-xr-x 7 www-data www-data 4.0K Jun 13 23:18 .
+drwxr-xr-x 6 root     root      170 Jun 13 22:47 ..
+drwxr-xr-x 4 www-data www-data   27 Jun 13 03:23 assets
+drwxr-xr-x 3 www-data www-data   64 Jun 13 22:56 data
+drwxr-xr-x 2 www-data www-data   40 Jun 13 22:43 deploy
+-rw-r--r-- 1 www-data www-data  12K Jun 13 22:11 index.html
+-rw-r--r-- 1 www-data www-data 2.1K Jun 13 22:43 install_prediksi_vps.sh
+drwxr-xr-x 2 www-data www-data   73 Jun 13 22:57 logs
+-rw-r--r-- 1 www-data www-data 2.5K Jun 13 22:11 README_INSTALL.md
+-rw-r--r-- 1 www-data www-data 1.6K Jun 13 20:38 README.md
+-rw-r--r-- 1 www-data www-data 2.3K Jun 13 22:44 README_SUPERMAX_BBFS.md
+drwxr-xr-x 3 www-data www-data  185 Jun 13 22:43 server
+-rw-r--r-- 1 www-data www-data 2.3K Jun 13 22:44 UPGRADE_SUPERMAX_COMMANDS.txt
+[exit_code=0]
+
+================================================================
+## SENSITIVE DOTFILES IN WEB ROOT
+================================================================
++ find /var/www/html/prediksi -maxdepth 1 -name '.*' -ls 2>/dev/null || true
+[exit_code=0]
+
+================================================================
+## DATA LIST
+================================================================
++ ls -lah /var/www/html/prediksi/data || true
+total 12M
+drwxr-xr-x 3 www-data www-data   64 Jun 13 22:56 .
+drwxr-xr-x 7 www-data www-data 4.0K Jun 13 23:18 ..
+-rw-r--r-- 1 www-data www-data  12M Jun 13 22:56 all_results_from_source_file.json
+drwxr-xr-x 4 www-data www-data 4.0K Jun 13 22:48 generated
+[exit_code=0]
+
+================================================================
+## GENERATED LIST
+================================================================
++ ls -lah /var/www/html/prediksi/data/generated || true
+total 3.1M
+drwxr-xr-x 4 www-data www-data 4.0K Jun 13 22:48 .
+drwxr-xr-x 3 www-data www-data   64 Jun 13 22:56 ..
+drwxr-xr-x 2 www-data www-data    6 Jun 13 22:43 checkpoints
+-rw-r--r-- 1 www-data www-data 6.8K Jun 13 22:44 latest_analyzer_config_snapshot.json
+-rw-r--r-- 1 www-data www-data  33K Jun 13 22:44 latest_backtest.json
+-rw-r--r-- 1 www-data www-data 198K Jun 13 22:44 latest_bbfs_2d_candidates.json
+-rw-r--r-- 1 www-data www-data 173K Jun 13 22:44 latest_bbfs_3d_candidates.json
+-rw-r--r-- 1 www-data www-data 590K Jun 13 22:44 latest_bbfs_7digit.json
+-rw-r--r-- 1 www-data www-data 338K Jun 13 22:44 latest_bbfs_audit.json
+-rw-r--r-- 1 www-data www-data  60K Jun 13 22:44 latest_champion_challenger.json
+-rw-r--r-- 1 www-data www-data  11K Jun 13 22:44 latest_data_freshness.json
+-rw-r--r-- 1 www-data www-data  60K Jun 13 22:44 latest_holdout_penalty.json
+-rw-r--r-- 1 www-data www-data  26K Jun 13 22:44 latest_holdout_recent_test.json
+-rw-r--r-- 1 www-data www-data 292K Jun 13 22:44 latest_model_freeze_audit.json
+-rw-r--r-- 1 www-data www-data  53K Jun 13 22:44 latest_model_objective.json
+-rw-r--r-- 1 www-data www-data 886K Jun 13 22:44 latest_next_draw.json
+-rw-r--r-- 1 www-data www-data  27K Jun 13 22:44 latest_next_draw_target.json
+-rw-r--r-- 1 www-data www-data  34K Jun 13 22:44 latest_prediction_gate.json
+-rw-r--r-- 1 www-data www-data  59K Jun 13 22:44 latest_prediction_readiness.json
+-rw-r--r-- 1 www-data www-data 1.1K Jun 13 22:44 latest_prediction_run_audit.json
+-rw-r--r-- 1 www-data www-data 100K Jun 13 22:44 latest_rolling_validation.json
+-rw-r--r-- 1 www-data www-data  457 Jun 13 22:44 latest_summary.json
+-rw-r--r-- 1 www-data www-data  29K Jun 13 22:44 latest_super_max_final_decision.json
+-rw-r--r-- 1 www-data www-data  52K Jun 13 22:44 latest_super_max_model_candidates.json
+-rw-r--r-- 1 www-data www-data  874 Jun 13 22:44 latest_super_max_search_space.json
+-rw-r--r-- 1 www-data www-data  392 Jun 13 22:44 latest_super_max_summary.json
+-rw-rw-r-- 1 www-data www-data  248 Jun 13 22:48 latest_warnings.json
+-rw-r--r-- 1 www-data www-data  580 Jun 13 22:44 manifest.json
+drwxr-xr-x 2 www-data www-data 4.0K Jun 13 23:11 markets
+-rw-r--r-- 1 www-data www-data  28K Jun 13 22:11 markets.json
+[exit_code=0]
+
+================================================================
+## SERVER LIST
+================================================================
++ ls -lah /var/www/html/prediksi/server || true
+total 136K
+drwxr-xr-x 3 www-data www-data  185 Jun 13 22:43 .
+drwxr-xr-x 7 www-data www-data 4.0K Jun 13 23:18 ..
+-rw-r--r-- 1 www-data www-data  21K Jun 13 22:08 analyze_fast.js
+-rw-r--r-- 1 www-data www-data  35K Jun 13 03:31 analyze.js
+-rw-r--r-- 1 www-data www-data 4.0K Jun 13 22:08 config.json
+drwxr-xr-x 2 www-data www-data 4.0K Jun 13 13:12 lib
+-rw-r--r-- 1 www-data www-data  21K Jun 13 22:43 markets_schedule.json
+-rwxr-xr-x 1 www-data www-data 1.4K Jun 13 22:43 run_analysis.sh
+-rwxr-xr-x 1 www-data www-data  126 Jun 13 22:43 run_supermax_bbfs.sh
+-rw-r--r-- 1 www-data www-data  29K Jun 13 22:44 supermax_finalize.js
+[exit_code=0]
+
+================================================================
+## LOGS LIST
+================================================================
++ ls -lah /var/www/html/prediksi/logs || true
+total 16K
+drwxr-xr-x 2 www-data www-data   73 Jun 13 22:57 .
+drwxr-xr-x 7 www-data www-data 4.0K Jun 13 23:18 ..
+-rw-rw-r-- 1 www-data www-data  871 Jun 13 22:48 analysis-error.log
+-rw-rw-r-- 1 www-data www-data   85 Jun 13 22:57 analysis.lock
+-rw-r--r-- 1 www-data www-data 1.5K Jun 13 23:11 analysis.log
+[exit_code=0]
+
+================================================================
+## MANIFEST HEAD
+================================================================
++ head -80 /var/www/html/prediksi/data/generated/manifest.json 2>/dev/null || true
+{
+  "schema_version": "1.0.0",
+  "generated_at": "2026-06-13T15:44:09.842Z",
+  "analyzer_version": "1.0.0+supermax-bbfs-contract",
+  "mode": "super-max",
+  "input_file": "all_results_from_source_file.json",
+  "input_total_rows": 87088,
+  "input_hash": "e8e4ca091d44",
+  "total_markets": 57,
+  "seed": 123456789,
+  "bbfs_enabled": true,
+  "status": "OK",
+  "duration_ms": 48313,
+  "input_file_size": null,
+  "input_last_modified": null,
+  "display_mode": "BBFS_7_DIGIT_UTAMA",
+  "run_status": "completed_with_warnings",
+  "config_hash": "c89804019fb55c06",
+  "warnings_count": 73
+}[exit_code=0]
+
+================================================================
+## MARKETS HEAD
+================================================================
++ head -40 /var/www/html/prediksi/data/generated/markets.json 2>/dev/null || true
+{
+  "schema_version": "1.0.0",
+  "generated_at": "2026-06-13T06:16:40.955Z",
+  "markets": [
+    {
+      "pasaran": "WISCONSIN EVENING",
+      "total_rows": 1568,
+      "valid_rows": 1568,
+      "eligible_for_prediction": true,
+      "bbfs_status": "BBFS_BLOCKED_BY_PREDICTION_GATE",
+      "bbfs_digits": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6"
+      ],
+      "prediction_gate_2d": "TIDAK_LAYAK_PREDIKSI",
+      "confidence_2d": "LOW",
+      "latest_date": "2026-06-10",
+      "latest_result": "5403",
+      "data_freshness": "FRESH"
+    },
+    {
+      "pasaran": "WASHINGTON DC MIDDAY",
+      "total_rows": 1620,
+      "valid_rows": 1620,
+      "eligible_for_prediction": true,
+      "bbfs_status": "BBFS_BLOCKED_BY_PREDICTION_GATE",
+      "bbfs_digits": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6"
+      ],
+[exit_code=0]
+
+================================================================
+## LATEST AUDIT HEAD
+================================================================
++ head -80 /var/www/html/prediksi/data/generated/latest_prediction_run_audit.json 2>/dev/null || true
+{
+  "schema_version": "1.0.0",
+  "generated_at": "2026-06-13T15:44:09.842Z",
+  "mode": "super-max",
+  "analyzer_version": "1.0.0+supermax-bbfs-contract",
+  "input_hash": "e8e4ca091d44",
+  "config_hash": "c89804019fb55c06",
+  "data_cutoff_date": "per_market",
+  "data_cutoff_result": "per_market",
+  "total_rows_before_cutoff": 0,
+  "total_rows_ignored_after_cutoff": 0,
+  "pasaran_processed": 57,
+  "next_draw_target": "see latest_next_draw_target.json",
+  "model_freeze_hash": "see latest_model_freeze_audit.json",
+  "prediction_gate_status": "see latest_prediction_gate.json",
+  "holdout_status": "see latest_holdout_penalty.json",
+  "confidence_limit_reason": "see market confidence_limiters",
+  "output_files_written": [
+    "latest_bbfs_7digit.json",
+    "latest_bbfs_2d_candidates.json",
+    "latest_bbfs_3d_candidates.json",
+    "latest_bbfs_audit.json",
+    "latest_prediction_gate.json",
+    "latest_prediction_readiness.json"
+  ],
+  "run_status": "completed_with_warnings",
+  "run_duration_seconds": 0,
+  "warnings_count": 73,
+  "fatal_errors_count": 0
+}[exit_code=0]
+
+================================================================
+## PROCESS CHECK
+================================================================
++ ps aux | grep -E 'analyze|run_analysis|supermax|node|nginx' | grep -v grep || true
+root       22834  0.0  0.7  11688  7564 ?        Ss   04:07   0:00 nginx: master process /usr/sbin/nginx -g daemon on; master_process on;
+www-data   22910  0.0  0.6  13380  6188 ?        S    04:16   0:00 nginx: worker process
+[exit_code=0]
+
+================================================================
+## CRON ROOT
+================================================================
++ crontab -l 2>/dev/null || true
+[exit_code=0]
+
+================================================================
+## JOURNAL NGINX LAST 80
+================================================================
++ journalctl -u nginx -n 80 --no-pager 2>/dev/null || true
+Jun 13 22:19:37 jhunaey systemd[1]: Starting nginx.service - A high performance web server and a reverse proxy server...
+Jun 13 22:19:37 jhunaey systemd[1]: Started nginx.service - A high performance web server and a reverse proxy server.
+Jun 13 22:21:04 jhunaey systemd[1]: Stopping nginx.service - A high performance web server and a reverse proxy server...
+Jun 13 22:21:04 jhunaey systemd[1]: nginx.service: Deactivated successfully.
+Jun 13 22:21:04 jhunaey systemd[1]: Stopped nginx.service - A high performance web server and a reverse proxy server.
+Jun 13 22:21:04 jhunaey systemd[1]: Starting nginx.service - A high performance web server and a reverse proxy server...
+Jun 13 22:21:04 jhunaey systemd[1]: Started nginx.service - A high performance web server and a reverse proxy server.
+Jun 13 22:29:53 jhunaey systemd[1]: Stopping nginx.service - A high performance web server and a reverse proxy server...
+Jun 13 22:29:53 jhunaey systemd[1]: nginx.service: Deactivated successfully.
+Jun 13 22:29:53 jhunaey systemd[1]: Stopped nginx.service - A high performance web server and a reverse proxy server.
+Jun 13 22:29:53 jhunaey systemd[1]: Starting nginx.service - A high performance web server and a reverse proxy server...
+Jun 13 22:29:53 jhunaey systemd[1]: Started nginx.service - A high performance web server and a reverse proxy server.
+Jun 13 23:18:46 jhunaey systemd[1]: Stopping nginx.service - A high performance web server and a reverse proxy server...
+Jun 13 23:18:46 jhunaey systemd[1]: nginx.service: Deactivated successfully.
+Jun 13 23:18:46 jhunaey systemd[1]: Stopped nginx.service - A high performance web server and a reverse proxy server.
+Jun 13 23:18:46 jhunaey systemd[1]: Starting nginx.service - A high performance web server and a reverse proxy server...
+Jun 13 23:18:46 jhunaey systemd[1]: Started nginx.service - A high performance web server and a reverse proxy server.
+Jun 13 23:21:06 jhunaey systemd[1]: Stopping nginx.service - A high performance web server and a reverse proxy server...
+Jun 13 23:21:06 jhunaey systemd[1]: nginx.service: Deactivated successfully.
+Jun 13 23:21:06 jhunaey systemd[1]: Stopped nginx.service - A high performance web server and a reverse proxy server.
+Jun 13 23:21:06 jhunaey systemd[1]: Starting nginx.service - A high performance web server and a reverse proxy server...
+Jun 13 23:21:06 jhunaey systemd[1]: Started nginx.service - A high performance web server and a reverse proxy server.
+Jun 13 23:21:42 jhunaey systemd[1]: Stopping nginx.service - A high performance web server and a reverse proxy server...
+Jun 13 23:21:42 jhunaey systemd[1]: nginx.service: Deactivated successfully.
+Jun 13 23:21:42 jhunaey systemd[1]: Stopped nginx.service - A high performance web server and a reverse proxy server.
+Jun 13 23:21:42 jhunaey systemd[1]: Starting nginx.service - A high performance web server and a reverse proxy server...
+Jun 13 23:21:42 jhunaey systemd[1]: Started nginx.service - A high performance web server and a reverse proxy server.
+Jun 14 03:56:57 jhunaey systemd[1]: Stopping nginx.service - A high performance web server and a reverse proxy server...
+Jun 14 03:56:57 jhunaey systemd[1]: nginx.service: Deactivated successfully.
+Jun 14 03:56:57 jhunaey systemd[1]: Stopped nginx.service - A high performance web server and a reverse proxy server.
+Jun 14 03:56:57 jhunaey systemd[1]: Starting nginx.service - A high performance web server and a reverse proxy server...
+Jun 14 03:56:57 jhunaey systemd[1]: Started nginx.service - A high performance web server and a reverse proxy server.
+Jun 14 04:00:18 jhunaey systemd[1]: Stopping nginx.service - A high performance web server and a reverse proxy server...
+Jun 14 04:00:18 jhunaey systemd[1]: nginx.service: Deactivated successfully.
+Jun 14 04:00:18 jhunaey systemd[1]: Stopped nginx.service - A high performance web server and a reverse proxy server.
+Jun 14 04:00:18 jhunaey systemd[1]: Starting nginx.service - A high performance web server and a reverse proxy server...
+Jun 14 04:00:18 jhunaey systemd[1]: Started nginx.service - A high performance web server and a reverse proxy server.
+Jun 14 04:07:08 jhunaey systemd[1]: Stopping nginx.service - A high performance web server and a reverse proxy server...
+Jun 14 04:07:08 jhunaey systemd[1]: nginx.service: Deactivated successfully.
+Jun 14 04:07:08 jhunaey systemd[1]: Stopped nginx.service - A high performance web server and a reverse proxy server.
+Jun 14 04:07:08 jhunaey systemd[1]: Starting nginx.service - A high performance web server and a reverse proxy server...
+Jun 14 04:07:08 jhunaey systemd[1]: Started nginx.service - A high performance web server and a reverse proxy server.
+Jun 14 04:16:23 jhunaey systemd[1]: Reloading nginx.service - A high performance web server and a reverse proxy server...
+Jun 14 04:16:23 jhunaey nginx[22908]: 2026/06/14 04:16:23 [notice] 22908#22908: signal process started
+Jun 14 04:16:23 jhunaey systemd[1]: Reloaded nginx.service - A high performance web server and a reverse proxy server.
+[exit_code=0]
+
+================================================================
+## SUMMARY
+================================================================
+local_root_http=200
+manifest_http=200
+markets_http=200
+server_protection_http=403
+logs_protection_http=403
+raw_data_protection_http=403
+domain_http=200
+domain_https=000
+
+EXPECTED:
+local_root_http=200
+manifest_http=200
+markets_http=200
+server_protection_http=403
+logs_protection_http=403
+raw_data_protection_http=403
+
+INSTALLATION_STATUS=OK_LIGHT_CHECK
