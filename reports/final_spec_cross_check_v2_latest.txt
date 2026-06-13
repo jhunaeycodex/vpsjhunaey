@@ -1,0 +1,296 @@
+PASS | web root sesuai /var/www/html/prediksi
+PASS | folder assets ada
+PASS | folder assets/js ada
+PASS | folder data ada
+PASS | folder data/generated ada
+PASS | folder data/generated/markets ada
+PASS | folder server ada
+PASS | folder logs ada
+PASS | file index.html ada
+PASS | file data/all_results_from_source_file.json ada
+PASS | file server/analyze.js ada
+PASS | file server/run_analysis.sh ada
+PASS | file server/config.json ada
+PASS | file server/markets_schedule.json ada
+WARN | assets/js/app.js belum ada; frontend memakai loader/dashboard split
+WARN | assets/css/style.css belum ada; CSS masih inline di index.html
+PASS | https://jhunaey.my.id/ aktif 200
+PASS | https://jhunaey.my.id/prediksi/ aktif 200
+PASS | data/generated/manifest.json ada
+PASS | data/generated/markets.json ada
+PASS | data/generated/latest_summary.json ada
+PASS | data/generated/latest_next_draw.json ada
+PASS | data/generated/latest_backtest.json ada
+PASS | data/generated/latest_rolling_validation.json ada
+PASS | data/generated/latest_holdout_recent_test.json ada
+PASS | data/generated/latest_model_objective.json ada
+PASS | data/generated/latest_warnings.json ada
+PASS | data/generated/latest_super_max_summary.json ada
+PASS | data/generated/latest_super_max_search_space.json ada
+PASS | data/generated/latest_super_max_model_candidates.json ada
+PASS | data/generated/latest_super_max_final_decision.json ada
+PASS | data/generated/latest_model_freeze_audit.json ada
+PASS | data/generated/latest_prediction_gate.json ada
+PASS | data/generated/latest_champion_challenger.json ada
+PASS | data/generated/latest_holdout_penalty.json ada
+PASS | data/generated/latest_analyzer_config_snapshot.json ada
+PASS | data/generated/latest_prediction_run_audit.json ada
+PASS | data/generated/latest_prediction_readiness.json ada
+PASS | data/generated/latest_data_freshness.json ada
+PASS | data/generated/latest_next_draw_target.json ada
+PASS | data/generated/latest_bbfs_7digit.json ada
+PASS | data/generated/latest_bbfs_2d_candidates.json ada
+PASS | data/generated/latest_bbfs_3d_candidates.json ada
+PASS | data/generated/latest_bbfs_audit.json ada
+PASS | manifest bbfs_enabled=true
+PASS | manifest display_mode BBFS_7_DIGIT_UTAMA
+PASS | latest_next_draw memuat field bbfs
+PASS | latest_bbfs_7digit memuat bbfs_digits
+PASS | latest_bbfs_2d_candidates memuat candidates
+PASS | latest_bbfs_3d_candidates memuat candidates
+PASS | schema_version ada pada semua JSON wajib yang ditemukan
+PASS | index memuat data-loader lokal
+PASS | frontend loader membaca manifest dan markets dari data/generated
+FAIL | frontend/assets memiliki referensi eksternal eksplisit; lihat laporan
+PASS | localStorage tidak ditemukan
+PASS | public /server/ = 403
+PASS | public /logs/ = 403
+PASS | public /data/all_results_from_source_file.json = 403
+PASS | tidak ada dotfile/dotdir di web root
+PASS | tidak ada file secret umum di web root
+PASS | tidak ada proses analyzer berat berjalan
+PASS | tidak ada root cron analyzer berat
+WARN | systemd prediksi-analysis belum tersedia; cron/timer masih opsional sebelum run berat
+FAIL | ditemukan istilah overclaim/perjudian positif; lihat laporan
+PASS | latest_prediction_run_audit memiliki run_status completed/completed_with_warnings
+WARN | output audit mungkin belum berasal dari full run dataset terbaru; run SuperMax berat belum final
+
+== SUMMARY ==
+PASS=60
+WARN=4
+FAIL=2
+FINAL_SPEC_CROSS_CHECK_STATUS=NEEDS_REVIEW
+PASS | web root sesuai /var/www/html/prediksi
+PASS | folder assets ada
+PASS | folder assets/js ada
+PASS | folder data ada
+PASS | folder data/generated ada
+PASS | folder data/generated/markets ada
+PASS | folder server ada
+PASS | folder logs ada
+PASS | file index.html ada
+PASS | file data/all_results_from_source_file.json ada
+PASS | file server/analyze.js ada
+PASS | file server/run_analysis.sh ada
+PASS | file server/config.json ada
+PASS | file server/markets_schedule.json ada
+WARN | assets/js/app.js belum ada; frontend memakai loader/dashboard split
+WARN | assets/css/style.css belum ada; CSS masih inline di index.html
+PASS | https://jhunaey.my.id/ aktif 200
+PASS | https://jhunaey.my.id/prediksi/ aktif 200
+PASS | data/generated/manifest.json ada
+PASS | data/generated/markets.json ada
+PASS | data/generated/latest_summary.json ada
+PASS | data/generated/latest_next_draw.json ada
+PASS | data/generated/latest_backtest.json ada
+PASS | data/generated/latest_rolling_validation.json ada
+PASS | data/generated/latest_holdout_recent_test.json ada
+PASS | data/generated/latest_model_objective.json ada
+PASS | data/generated/latest_warnings.json ada
+PASS | data/generated/latest_super_max_summary.json ada
+PASS | data/generated/latest_super_max_search_space.json ada
+PASS | data/generated/latest_super_max_model_candidates.json ada
+PASS | data/generated/latest_super_max_final_decision.json ada
+PASS | data/generated/latest_model_freeze_audit.json ada
+PASS | data/generated/latest_prediction_gate.json ada
+PASS | data/generated/latest_champion_challenger.json ada
+PASS | data/generated/latest_holdout_penalty.json ada
+PASS | data/generated/latest_analyzer_config_snapshot.json ada
+PASS | data/generated/latest_prediction_run_audit.json ada
+PASS | data/generated/latest_prediction_readiness.json ada
+PASS | data/generated/latest_data_freshness.json ada
+PASS | data/generated/latest_next_draw_target.json ada
+PASS | data/generated/latest_bbfs_7digit.json ada
+PASS | data/generated/latest_bbfs_2d_candidates.json ada
+PASS | data/generated/latest_bbfs_3d_candidates.json ada
+PASS | data/generated/latest_bbfs_audit.json ada
+PASS | manifest bbfs_enabled=true
+PASS | manifest display_mode BBFS_7_DIGIT_UTAMA
+PASS | latest_next_draw memuat field bbfs
+PASS | latest_bbfs_7digit memuat bbfs_digits
+PASS | latest_bbfs_2d_candidates memuat candidates
+PASS | latest_bbfs_3d_candidates memuat candidates
+PASS | schema_version ada pada semua JSON wajib yang ditemukan
+PASS | index memuat data-loader lokal
+PASS | frontend loader membaca manifest dan markets dari data/generated
+FAIL | frontend/assets memiliki referensi eksternal eksplisit; lihat laporan
+PASS | localStorage tidak ditemukan
+PASS | public /server/ = 403
+PASS | public /logs/ = 403
+PASS | public /data/all_results_from_source_file.json = 403
+PASS | tidak ada dotfile/dotdir di web root
+PASS | tidak ada file secret umum di web root
+PASS | tidak ada proses analyzer berat berjalan
+PASS | tidak ada root cron analyzer berat
+WARN | systemd prediksi-analysis belum tersedia; cron/timer masih opsional sebelum run berat
+FAIL | ditemukan istilah overclaim/perjudian positif; lihat laporan
+PASS | latest_prediction_run_audit memiliki run_status completed/completed_with_warnings
+WARN | output audit mungkin belum berasal dari full run dataset terbaru; run SuperMax berat belum final
+
+== SUMMARY ==
+PASS=60
+WARN=4
+FAIL=2
+FINAL_SPEC_CROSS_CHECK_STATUS=NEEDS_REVIEW
+est_prediction_run_audit memiliki run_status completed/completed_with_warnings
+WARN | output audit mungkin belum berasal dari full run dataset terbaru; run SuperMax berat belum final
+
+== SUMMARY ==
+PASS=60
+WARN=4
+FAIL=2
+FINAL_SPEC_CROSS_CHECK_STATUS=NEEDS_REVIEW
+tml ada
+PASS | file data/all_results_from_source_file.json ada
+PASS | file server/analyze.js ada
+PASS | file server/run_analysis.sh ada
+PASS | file server/config.json ada
+PASS | file server/markets_schedule.json ada
+WARN | assets/js/app.js belum ada; frontend memakai loader/dashboard split
+WARN | assets/css/style.css belum ada; CSS masih inline di index.html
+PASS | https://jhunaey.my.id/ aktif 200
+PASS | https://jhunaey.my.id/prediksi/ aktif 200
+PASS | data/generated/manifest.json ada
+PASS | data/generated/markets.json ada
+PASS | data/generated/latest_summary.json ada
+PASS | data/generated/latest_next_draw.json ada
+PASS | data/generated/latest_backtest.json ada
+PASS | data/generated/latest_rolling_validation.json ada
+PASS | data/generated/latest_holdout_recent_test.json ada
+PASS | data/generated/latest_model_objective.json ada
+PASS | data/generated/latest_warnings.json ada
+PASS | data/generated/latest_super_max_summary.json ada
+PASS | data/generated/latest_super_max_search_space.json ada
+PASS | data/generated/latest_super_max_model_candidates.json ada
+PASS | data/generated/latest_super_max_final_decision.json ada
+PASS | data/generated/latest_model_freeze_audit.json ada
+PASS | data/generated/latest_prediction_gate.json ada
+PASS | data/generated/latest_champion_challenger.json ada
+PASS | data/generated/latest_holdout_penalty.json ada
+PASS | data/generated/latest_analyzer_config_snapshot.json ada
+PASS | data/generated/latest_prediction_run_audit.json ada
+PASS | data/generated/latest_prediction_readiness.json ada
+PASS | data/generated/latest_data_freshness.json ada
+PASS | data/generated/latest_next_draw_target.json ada
+PASS | data/generated/latest_bbfs_7digit.json ada
+PASS | data/generated/latest_bbfs_2d_candidates.json ada
+PASS | data/generated/latest_bbfs_3d_candidates.json ada
+PASS | data/generated/latest_bbfs_audit.json ada
+PASS | manifest bbfs_enabled=true
+PASS | manifest display_mode BBFS_7_DIGIT_UTAMA
+PASS | latest_next_draw memuat field bbfs
+PASS | latest_bbfs_7digit memuat bbfs_digits
+PASS | latest_bbfs_2d_candidates memuat candidates
+PASS | latest_bbfs_3d_candidates memuat candidates
+PASS | schema_version ada pada semua JSON wajib yang ditemukan
+PASS | index memuat data-loader lokal
+PASS | frontend loader membaca manifest dan markets dari data/generated
+FAIL | frontend/assets memiliki referensi eksternal eksplisit; lihat laporan
+PASS | localStorage tidak ditemukan
+PASS | public /server/ = 403
+PASS | public /logs/ = 403
+PASS | public /data/all_results_from_source_file.json = 403
+PASS | tidak ada dotfile/dotdir di web root
+PASS | tidak ada file secret umum di web root
+PASS | tidak ada proses analyzer berat berjalan
+PASS | tidak ada root cron analyzer berat
+WARN | systemd prediksi-analysis belum tersedia; cron/timer masih opsional sebelum run berat
+FAIL | ditemukan istilah overclaim/perjudian positif; lihat laporan
+PASS | latest_prediction_run_audit memiliki run_status completed/completed_with_warnings
+WARN | output audit mungkin belum berasal dari full run dataset terbaru; run SuperMax berat belum final
+
+== SUMMARY ==
+PASS=60
+WARN=4
+FAIL=2
+FINAL_SPEC_CROSS_CHECK_STATUS=NEEDS_REVIEW
+est_prediction_run_audit memiliki run_status completed/completed_with_warnings
+WARN | output audit mungkin belum berasal dari full run dataset terbaru; run SuperMax berat belum final
+
+== SUMMARY ==
+PASS=60
+WARN=4
+FAIL=2
+FINAL_SPEC_CROSS_CHECK_STATUS=NEEDS_REVIEW
+tml ada
+PASS | file data/all_results_from_source_file.json ada
+PASS | file server/analyze.js ada
+PASS | file server/run_analysis.sh ada
+PASS | file server/config.json ada
+PASS | file server/markets_schedule.json ada
+WARN | assets/js/app.js belum ada; frontend memakai loader/dashboard split
+WARN | assets/css/style.css belum ada; CSS masih inline di index.html
+PASS | https://jhunaey.my.id/ aktif 200
+PASS | https://jhunaey.my.id/prediksi/ aktif 200
+PASS | data/generated/manifest.json ada
+PASS | data/generated/markets.json ada
+PASS | data/generated/latest_summary.json ada
+PASS | data/generated/latest_next_draw.json ada
+PASS | data/generated/latest_backtest.json ada
+PASS | data/generated/latest_rolling_validation.json ada
+PASS | data/generated/latest_holdout_recent_test.json ada
+PASS | data/generated/latest_model_objective.json ada
+PASS | data/generated/latest_warnings.json ada
+PASS | data/generated/latest_super_max_summary.json ada
+PASS | data/generated/latest_super_max_search_space.json ada
+PASS | data/generated/latest_super_max_model_candidates.json ada
+PASS | data/generated/latest_super_max_final_decision.json ada
+PASS | data/generated/latest_model_freeze_audit.json ada
+PASS | data/generated/latest_prediction_gate.json ada
+PASS | data/generated/latest_champion_challenger.json ada
+PASS | data/generated/latest_holdout_penalty.json ada
+PASS | data/generated/latest_analyzer_config_snapshot.json ada
+PASS | data/generated/latest_prediction_run_audit.json ada
+PASS | data/generated/latest_prediction_readiness.json ada
+PASS | data/generated/latest_data_freshness.json ada
+PASS | data/generated/latest_next_draw_target.json ada
+PASS | data/generated/latest_bbfs_7digit.json ada
+PASS | data/generated/latest_bbfs_2d_candidates.json ada
+PASS | data/generated/latest_bbfs_3d_candidates.json ada
+PASS | data/generated/latest_bbfs_audit.json ada
+PASS | manifest bbfs_enabled=true
+PASS | manifest display_mode BBFS_7_DIGIT_UTAMA
+PASS | latest_next_draw memuat field bbfs
+PASS | latest_bbfs_7digit memuat bbfs_digits
+PASS | latest_bbfs_2d_candidates memuat candidates
+PASS | latest_bbfs_3d_candidates memuat candidates
+PASS | schema_version ada pada semua JSON wajib yang ditemukan
+PASS | index memuat data-loader lokal
+PASS | frontend loader membaca manifest dan markets dari data/generated
+FAIL | frontend/assets memiliki referensi eksternal eksplisit; lihat laporan
+PASS | localStorage tidak ditemukan
+PASS | public /server/ = 403
+PASS | public /logs/ = 403
+PASS | public /data/all_results_from_source_file.json = 403
+PASS | tidak ada dotfile/dotdir di web root
+PASS | tidak ada file secret umum di web root
+PASS | tidak ada proses analyzer berat berjalan
+PASS | tidak ada root cron analyzer berat
+WARN | systemd prediksi-analysis belum tersedia; cron/timer masih opsional sebelum run berat
+FAIL | ditemukan istilah overclaim/perjudian positif; lihat laporan
+PASS | latest_prediction_run_audit memiliki run_status completed/completed_with_warnings
+WARN | output audit mungkin belum berasal dari full run dataset terbaru; run SuperMax berat belum final
+
+== SUMMARY ==
+PASS=60
+WARN=4
+FAIL=2
+FINAL_SPEC_CROSS_CHECK_STATUS=NEEDS_REVIEW
+est_prediction_run_audit memiliki run_status completed/completed_with_warnings
+WARN | output audit mungkin belum berasal dari full run dataset terbaru; run SuperMax berat belum final
+
+== SUMMARY ==
+PASS=60
+WARN=4
+FAIL=2
+FINAL_SPEC_CROSS_CHECK_STATUS=NEEDS_REVIEW
