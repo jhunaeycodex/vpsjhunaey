@@ -1,0 +1,32 @@
+NGINX PREDIKSI FIX CHECK
+generated_at=2026-06-14T07:29:52+07:00
+== curl status ==
+prediksi_root=200
+data_loader=200
+dashboard_js=200
+markets_json=404
+server_dir=200
+logs_dir=200
+raw_data=404
+== content types ==
+HTTP/1.1 200 OK
+Server: nginx/1.24.0 (Ubuntu)
+Date: Sun, 14 Jun 2026 00:29:53 GMT
+Content-Type: text/html
+Content-Length: 11455
+Last-Modified: Sun, 14 Jun 2026 00:26:52 GMT
+Connection: keep-alive
+ETag: "6a2df54c-2cbf"
+Accept-Ranges: bytes
+
+HTTP/1.1 404 Not Found
+Server: nginx/1.24.0 (Ubuntu)
+Date: Sun, 14 Jun 2026 00:29:53 GMT
+Content-Type: text/html
+Content-Length: 162
+Connection: keep-alive
+Cache-Control: no-store, no-cache, must-revalidate, proxy-revalidate
+
+== nginx test ==
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
