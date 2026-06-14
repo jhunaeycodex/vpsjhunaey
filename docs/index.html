@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Prediksi Static Tanpa VPS</title>
+  <style>
+    *{box-sizing:border-box}body{margin:0;background:#08111f;color:#e5e7eb;font-family:Arial,Helvetica,sans-serif}header{padding:18px;background:#0f172a;border-bottom:1px solid #263449}main{max-width:980px;margin:0 auto;padding:18px}.card{border:1px solid #253247;background:#0f172a;border-radius:16px;padding:16px;margin:12px 0}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}.pill{display:inline-block;background:#1e3a8a;padding:6px 10px;border-radius:999px;margin:3px}.ok{background:#14532d}.warn{background:#713f12}code{background:#111827;padding:2px 5px;border-radius:5px}.muted{opacity:.72;line-height:1.55}button{border:0;border-radius:10px;padding:12px 14px;background:#2563eb;color:white;font-weight:700;cursor:pointer}textarea{width:100%;height:260px;background:#020617;color:#e5e7eb;border:1px solid #334155;border-radius:12px;padding:12px}pre{white-space:pre-wrap;overflow:auto;background:#020617;border:1px solid #334155;border-radius:12px;padding:12px}
+  </style>
+</head>
+<body>
+<header>
+  <h1>Prediksi Static Tanpa VPS</h1>
+  <div class="muted">Halaman ini berjalan sebagai file statis. Tidak butuh VPS, Nginx, SSH, terminal, Node, atau backend.</div>
+</header>
+<main>
+  <section class="card">
+    <span class="pill ok">STATIC MODE</span>
+    <span class="pill">NO VPS</span>
+    <span class="pill">NO BACKEND</span>
+    <span class="pill">NO CDN</span>
+    <p class="muted">Agar data prediksi muncul penuh tanpa VPS, file JSON hasil analyzer harus disimpan di repository GitHub Pages, misalnya di <code>docs/data/generated/</code>. Halaman ini tidak mengambil data dari VPS.</p>
+  </section>
+
+  <section class="grid">
+    <div class="card"><h2>Status Website</h2><p class="muted">Frontend statis siap. Data JSON belum ditanam ke GitHub Pages.</p></div>
+    <div class="card"><h2>Target File</h2><p><code>docs/data/generated/markets.json</code></p><p><code>docs/data/generated/latest_bbfs_7digit.json</code></p></div>
+    <div class="card"><h2>Screenshot</h2><p class="muted">Tidak ada script anti-screenshot di halaman ini.</p></div>
+  </section>
+
+  <section class="card">
+    <h2>Mode Darurat: Tempel JSON</h2>
+    <p class="muted">Tempel isi <code>markets.json</code> atau JSON output lain di bawah ini untuk melihat ringkasan tanpa server.</p>
+    <textarea id="jsonInput" placeholder="Tempel JSON di sini..."></textarea><br><br>
+    <button onclick="renderJson()">Render JSON</button>
+    <pre id="out">Menunggu JSON...</pre>
+  </section>
+</main>
+<script>
+function renderJson(){
+  const out=document.getElementById('out');
+  try{
+    const data=JSON.parse(document.getElementById('jsonInput').value);
+    if(Array.isArray(data.markets)){
+      out.textContent='Markets: '+data.markets.length+'\n\n'+data.markets.slice(0,80).map((m,i)=>String(i+1)+'. '+(m.pasaran||m.market||m.name||'-')+' | '+(m.latest_result||m.bbfs_status||'')).join('\n');
+    } else if(Array.isArray(data)){
+      out.textContent='Array length: '+data.length+'\n\n'+JSON.stringify(data.slice(0,20),null,2);
+    } else {
+      out.textContent=JSON.stringify(data,null,2).slice(0,20000);
+    }
+  }catch(e){out.textContent='JSON error: '+e.message;}
+}
+</script>
+</body>
+</html>
