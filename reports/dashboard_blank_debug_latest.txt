@@ -1,0 +1,52 @@
+DASHBOARD BLANK DEBUG
+generated_at=2026-06-14T07:27:13+07:00
+== index scripts ==
+213:<script src="assets/js/data-loader.js"></script>
+== public files ==
+HTTP/1.1 200 OK
+Server: nginx/1.24.0 (Ubuntu)
+Date: Sun, 14 Jun 2026 00:27:13 GMT
+Content-Type: text/html
+Content-Length: 11455
+Last-Modified: Sun, 14 Jun 2026 00:26:52 GMT
+Connection: keep-alive
+ETag: "6a2df54c-2cbf"
+Accept-Ranges: bytes
+
+HTTP/1.1 200 OK
+Server: nginx/1.24.0 (Ubuntu)
+Date: Sun, 14 Jun 2026 00:27:13 GMT
+Content-Type: text/html
+Content-Length: 11455
+Last-Modified: Sun, 14 Jun 2026 00:26:52 GMT
+Connection: keep-alive
+ETag: "6a2df54c-2cbf"
+Accept-Ranges: bytes
+
+HTTP/1.1 200 OK
+Server: nginx/1.24.0 (Ubuntu)
+Date: Sun, 14 Jun 2026 00:27:13 GMT
+Content-Type: text/html
+Content-Length: 11455
+Last-Modified: Sun, 14 Jun 2026 00:26:52 GMT
+Connection: keep-alive
+ETag: "6a2df54c-2cbf"
+Accept-Ranges: bytes
+
+HTTP/1.1 404 Not Found
+Server: nginx/1.24.0 (Ubuntu)
+Date: Sun, 14 Jun 2026 00:27:13 GMT
+Content-Type: text/html
+Content-Length: 162
+Connection: keep-alive
+Cache-Control: no-store, no-cache, must-revalidate, proxy-revalidate
+
+== markets head ==
+<html>
+<head><title>404 Not Found</title></head>
+<body>
+<center><h1>404 Not Found</h1></center>
+<hr><center>nginx/1.24.0 (Ubuntu)</center>
+</body>
+</html>
+
