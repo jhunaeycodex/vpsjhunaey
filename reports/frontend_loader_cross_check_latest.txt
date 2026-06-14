@@ -16,7 +16,9 @@ PASS | server/ public = 403
 PASS | logs/ public = 403
 
 == index script lines ==
-213:<script src="assets/js/data-loader.js"></script>
+215:<script src="assets/js/data-loader.js"></script>
+216:  <script src="assets/js/screenshot-tools.js"></script>
+217:  <script src="assets/js/screenshot-allow.js"></script>
 
 == loader first 220 lines ==
      1	(async function loadDashboardData() {
@@ -125,7 +127,9 @@ PASS | server/ public = 403
 PASS | logs/ public = 403
 
 == index script lines ==
-213:<script src="assets/js/data-loader.js"></script>
+215:<script src="assets/js/data-loader.js"></script>
+216:  <script src="assets/js/screenshot-tools.js"></script>
+217:  <script src="assets/js/screenshot-allow.js"></script>
 
 == loader first 220 lines ==
      1	(async function loadDashboardData() {
@@ -242,7 +246,9 @@ PASS | server/ public = 403
 PASS | logs/ public = 403
 
 == index script lines ==
-213:<script src="assets/js/data-loader.js"></script>
+215:<script src="assets/js/data-loader.js"></script>
+216:  <script src="assets/js/screenshot-tools.js"></script>
+217:  <script src="assets/js/screenshot-allow.js"></script>
 
 == loader first 220 lines ==
      1	(async function loadDashboardData() {

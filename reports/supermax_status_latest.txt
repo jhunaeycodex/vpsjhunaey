@@ -1,19 +1,19 @@
 SUPERMAX STATUS
-generated_at=2026-06-14T07:06:54+07:00
+generated_at=2026-06-14T07:24:45+07:00
 web_root=/var/www/html/prediksi
 
 == PROCESS ==
 root       28807  0.0  0.7  16904  7480 pts/0    SN   06:35   0:00 sudo -u www-data ./server/run_analysis.sh super-max --bbfs
 root       28809  0.0  0.2  16904  2528 pts/1    SNs+ 06:35   0:00 sudo -u www-data ./server/run_analysis.sh super-max --bbfs
 www-data   28810  0.0  0.3   7340  3704 pts/1    SN   06:35   0:00 /bin/bash ./server/run_analysis.sh super-max --bbfs
-www-data   28818 98.6 15.1 1090544 149224 pts/1  RNl  06:35  31:01 node /var/www/html/prediksi/server/analyze.js --mode=super-max --bbfs
+www-data   28818 98.6 16.0 1099124 157808 pts/1  SNl  06:35  48:37 node /var/www/html/prediksi/server/analyze.js --mode=super-max --bbfs
 
 == PID FILE ==
 28807
 
 == MEMORY ==
                total        used        free      shared  buff/cache   available
-Mem:           961Mi       487Mi       202Mi       2.6Mi       435Mi       473Mi
+Mem:           961Mi       497Mi       192Mi       2.6Mi       435Mi       464Mi
 Swap:          2.0Gi          0B       2.0Gi
 
 == DISK ==
@@ -49,6 +49,22 @@ command=nice -n 10 ionice -c2 -n7 sudo -u www-data ./server/run_analysis.sh supe
 [2026-06-13T23:57:12.332Z]   CALIFORNIA: generating BBFS 7 Digit Utama...
 [2026-06-13T23:57:12.365Z] Analyzing market: CHINAPOOLS (1615 records)
 [2026-06-13T23:57:12.373Z]   CHINAPOOLS: running preset selection (20 presets × 2D+3D)
+[2026-06-14T00:09:56.307Z]   CHINAPOOLS: champion 2D=stability-heavy (100), 3D=lag-heavy (100)
+[2026-06-14T00:09:56.309Z]   CHINAPOOLS: running full backtest...
+[2026-06-14T00:10:09.741Z]   CHINAPOOLS: running holdout test...
+[2026-06-14T00:10:13.490Z]   CHINAPOOLS: running random simulation...
+[2026-06-14T00:10:13.544Z]   CHINAPOOLS: computing final rankings...
+[2026-06-14T00:10:13.560Z]   CHINAPOOLS: generating BBFS 7 Digit Utama...
+[2026-06-14T00:10:13.675Z] Analyzing market: FLORIDA EVENING (1618 records)
+[2026-06-14T00:10:13.678Z]   FLORIDA EVENING: running preset selection (20 presets × 2D+3D)
+[2026-06-14T00:23:49.580Z]   FLORIDA EVENING: champion 2D=trend-heavy (100), 3D=trend-heavy (100)
+[2026-06-14T00:23:49.583Z]   FLORIDA EVENING: running full backtest...
+[2026-06-14T00:24:03.083Z]   FLORIDA EVENING: running holdout test...
+[2026-06-14T00:24:06.750Z]   FLORIDA EVENING: running random simulation...
+[2026-06-14T00:24:06.778Z]   FLORIDA EVENING: computing final rankings...
+[2026-06-14T00:24:06.794Z]   FLORIDA EVENING: generating BBFS 7 Digit Utama...
+[2026-06-14T00:24:06.844Z] Analyzing market: FLORIDA MIDDAY (1617 records)
+[2026-06-14T00:24:06.848Z]   FLORIDA MIDDAY: running preset selection (20 presets × 2D+3D)
 
 == GENERATED FILE TIMES ==
 total 3.1M
@@ -80,7 +96,7 @@ drwxr-xr-x 2 www-data www-data    6 Jun 13 22:43 checkpoints
 -rw-r--r-- 1 www-data www-data  392 Jun 13 22:44 latest_super_max_summary.json
 -rw-r--r-- 1 www-data www-data  248 Jun 13 22:48 latest_warnings.json
 -rw-r--r-- 1 www-data www-data  580 Jun 13 22:44 manifest.json
-drwxr-xr-x 2 www-data www-data 4.0K Jun 14 06:57 markets
+drwxr-xr-x 2 www-data www-data 4.0K Jun 14 07:24 markets
 -rw-r--r-- 1 www-data www-data  28K Jun 13 22:11 markets.json
 
 == AUDIT HEAD ==

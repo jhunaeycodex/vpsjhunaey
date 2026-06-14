@@ -1,6 +1,6 @@
 [1/9] Backup nginx config
 [1/9] Backup nginx config
-nerated_at=2026-06-14T04:50:32+07:00
+nerated_at=2026-06-14T07:24:42+07:00
 web_root=/var/www/html/prediksi
 domain=jhunaey.my.id
 
@@ -51,11 +51,11 @@ Found the following certs:
 ## CERTBOT TIMER
 ================================================================
 + systemctl list-timers | grep -E 'certbot|snap.certbot' || true; systemctl status certbot.timer --no-pager 2>/dev/null || true
-Sun 2026-06-14 06:27:56 WIB 1h 37min -                                      - certbot.timer                  certbot.service
+Sun 2026-06-14 20:16:32 WIB      12h Sun 2026-06-14 06:27:57 WIB    56min ago certbot.timer                  certbot.service
 ● certbot.timer - Run certbot twice daily
      Loaded: loaded (/usr/lib/systemd/system/certbot.timer; enabled; preset: enabled)
-     Active: active (waiting) since Sat 2026-06-13 22:30:45 WIB; 6h ago
-    Trigger: Sun 2026-06-14 06:27:56 WIB; 1h 37min left
+     Active: active (waiting) since Sat 2026-06-13 22:30:45 WIB; 8h ago
+    Trigger: Sun 2026-06-14 20:16:32 WIB; 12h left
    Triggers: ● certbot.service
 
 Jun 13 22:30:45 jhunaey systemd[1]: Started certbot.timer - Run certbot twice daily.
@@ -74,15 +74,15 @@ Status: inactive
 + curl -k -I --max-time 10 https://jhunaey.my.id/; curl -k -I --max-time 10 https://jhunaey.my.id/data/generated/manifest.json; curl -k -I --max-time 10 https://jhunaey.my.id/data/generated/markets.json; curl -k -I --max-time 10 https://jhunaey.my.id/server/; curl -k -I --max-time 10 https://jhunaey.my.id/logs/; curl -k -I --max-time 10 https://jhunaey.my.id/data/all_results_from_source_file.json
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
-  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0 11455    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0 11697    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
 HTTP/1.1 200 OK
 Server: nginx/1.24.0 (Ubuntu)
-Date: Sat, 13 Jun 2026 21:50:34 GMT
+Date: Sun, 14 Jun 2026 00:24:44 GMT
 Content-Type: text/html
-Content-Length: 11455
-Last-Modified: Sat, 13 Jun 2026 15:11:02 GMT
+Content-Length: 11697
+Last-Modified: Sun, 14 Jun 2026 00:20:16 GMT
 Connection: keep-alive
-ETag: "6a2d7306-2cbf"
+ETag: "6a2df3c0-2db1"
 Accept-Ranges: bytes
 
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
@@ -90,7 +90,7 @@ Accept-Ranges: bytes
   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0   580    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
 HTTP/1.1 200 OK
 Server: nginx/1.24.0 (Ubuntu)
-Date: Sat, 13 Jun 2026 21:50:34 GMT
+Date: Sun, 14 Jun 2026 00:24:44 GMT
 Content-Type: application/json
 Content-Length: 580
 Last-Modified: Sat, 13 Jun 2026 15:44:09 GMT
@@ -104,7 +104,7 @@ Accept-Ranges: bytes
   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0 28314    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
 HTTP/1.1 200 OK
 Server: nginx/1.24.0 (Ubuntu)
-Date: Sat, 13 Jun 2026 21:50:34 GMT
+Date: Sun, 14 Jun 2026 00:24:44 GMT
 Content-Type: application/json
 Content-Length: 28314
 Last-Modified: Sat, 13 Jun 2026 15:11:20 GMT
@@ -118,7 +118,7 @@ Accept-Ranges: bytes
   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0   162    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
 HTTP/1.1 403 Forbidden
 Server: nginx/1.24.0 (Ubuntu)
-Date: Sat, 13 Jun 2026 21:50:34 GMT
+Date: Sun, 14 Jun 2026 00:24:44 GMT
 Content-Type: text/html
 Content-Length: 162
 Connection: keep-alive
@@ -128,7 +128,7 @@ Connection: keep-alive
   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0   162    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
 HTTP/1.1 403 Forbidden
 Server: nginx/1.24.0 (Ubuntu)
-Date: Sat, 13 Jun 2026 21:50:34 GMT
+Date: Sun, 14 Jun 2026 00:24:44 GMT
 Content-Type: text/html
 Content-Length: 162
 Connection: keep-alive
@@ -138,7 +138,7 @@ Connection: keep-alive
   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0   162    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
 HTTP/1.1 403 Forbidden
 Server: nginx/1.24.0 (Ubuntu)
-Date: Sat, 13 Jun 2026 21:50:34 GMT
+Date: Sun, 14 Jun 2026 00:24:44 GMT
 Content-Type: text/html
 Content-Length: 162
 Connection: keep-alive
@@ -181,7 +181,7 @@ drwxr-xr-x 112 root root 8.0K Jun 13 22:30 ..
 ================================================================
 + free -h; swapon --show || true
                total        used        free      shared  buff/cache   available
-Mem:           961Mi       390Mi       309Mi       2.5Mi       425Mi       570Mi
+Mem:           961Mi       495Mi       194Mi       2.6Mi       435Mi       466Mi
 Swap:          2.0Gi          0B       2.0Gi
 NAME      TYPE SIZE USED PRIO
 /swapfile file   2G   0B   -2
@@ -192,7 +192,11 @@ NAME      TYPE SIZE USED PRIO
 ================================================================
 + ps aux | grep -E 'analyze|run_analysis|supermax|node|nginx' | grep -v grep || true
 root       22834  0.0  0.7  21928  7644 ?        Ss   04:07   0:00 nginx: master process /usr/sbin/nginx -g daemon on; master_process on;
-www-data   23888  0.0  0.9  23792  9580 ?        S    04:39   0:00 nginx: worker process
+www-data   23888  0.0  0.9  23792  9776 ?        S    04:39   0:00 nginx: worker process
+root       28807  0.0  0.7  16904  7480 pts/0    SN   06:35   0:00 sudo -u www-data ./server/run_analysis.sh super-max --bbfs
+root       28809  0.0  0.2  16904  2528 pts/1    SNs+ 06:35   0:00 sudo -u www-data ./server/run_analysis.sh super-max --bbfs
+www-data   28810  0.0  0.3   7340  3704 pts/1    SN   06:35   0:00 /bin/bash ./server/run_analysis.sh super-max --bbfs
+www-data   28818 98.6 16.0 1099124 157808 pts/1  RNl  06:35  48:37 node /var/www/html/prediksi/server/analyze.js --mode=super-max --bbfs
 [exit_code=0]
 
 ================================================================
@@ -205,3 +209,10 @@ server_https=403
 logs_https=403
 raw_data_https=403
 INSTALL_FINALIZE_STATUS=OK
+NSTALL_FINALIZE_STATUS=OK
+NSTALL_FINALIZE_STATUS=OK
+NSTALL_FINALIZE_STATUS=OK
+NSTALL_FINALIZE_STATUS=OK
+NSTALL_FINALIZE_STATUS=OK
+NSTALL_FINALIZE_STATUS=OK
+NSTALL_FINALIZE_STATUS=OK
