@@ -1,19 +1,19 @@
 SUPERMAX STATUS
-generated_at=2026-06-14T06:35:56+07:00
+generated_at=2026-06-14T07:06:54+07:00
 web_root=/var/www/html/prediksi
 
 == PROCESS ==
 root       28807  0.0  0.7  16904  7480 pts/0    SN   06:35   0:00 sudo -u www-data ./server/run_analysis.sh super-max --bbfs
 root       28809  0.0  0.2  16904  2528 pts/1    SNs+ 06:35   0:00 sudo -u www-data ./server/run_analysis.sh super-max --bbfs
 www-data   28810  0.0  0.3   7340  3704 pts/1    SN   06:35   0:00 /bin/bash ./server/run_analysis.sh super-max --bbfs
-www-data   28818 97.5 13.1 1072596 129576 pts/1  RNl  06:35   0:29 node /var/www/html/prediksi/server/analyze.js --mode=super-max --bbfs
+www-data   28818 98.6 15.1 1090544 149224 pts/1  RNl  06:35  31:01 node /var/www/html/prediksi/server/analyze.js --mode=super-max --bbfs
 
 == PID FILE ==
 28807
 
 == MEMORY ==
                total        used        free      shared  buff/cache   available
-Mem:           961Mi       494Mi       196Mi       2.6Mi       434Mi       466Mi
+Mem:           961Mi       487Mi       202Mi       2.6Mi       435Mi       473Mi
 Swap:          2.0Gi          0B       2.0Gi
 
 == DISK ==
@@ -33,6 +33,22 @@ command=nice -n 10 ionice -c2 -n7 sudo -u www-data ./server/run_analysis.sh supe
 [2026-06-13T23:35:27.119Z] Markets to analyze: 57
 [2026-06-13T23:35:27.121Z] Analyzing market: BULLSEYE (1616 records)
 [2026-06-13T23:35:27.122Z]   BULLSEYE: running preset selection (20 presets × 2D+3D)
+[2026-06-13T23:48:29.477Z]   BULLSEYE: champion 2D=holdout-stability (100), 3D=stability-heavy (100)
+[2026-06-13T23:48:29.480Z]   BULLSEYE: running full backtest...
+[2026-06-13T23:48:42.102Z]   BULLSEYE: running holdout test...
+[2026-06-13T23:48:45.803Z]   BULLSEYE: running random simulation...
+[2026-06-13T23:48:45.865Z]   BULLSEYE: computing final rankings...
+[2026-06-13T23:48:45.880Z]   BULLSEYE: generating BBFS 7 Digit Utama...
+[2026-06-13T23:48:46.000Z] Analyzing market: CALIFORNIA (1316 records)
+[2026-06-13T23:48:46.000Z]   CALIFORNIA: running preset selection (20 presets × 2D+3D)
+[2026-06-13T23:57:00.501Z]   CALIFORNIA: champion 2D=gap-heavy (100), 3D=anti-recent-hit (100)
+[2026-06-13T23:57:00.504Z]   CALIFORNIA: running full backtest...
+[2026-06-13T23:57:09.570Z]   CALIFORNIA: running holdout test...
+[2026-06-13T23:57:12.272Z]   CALIFORNIA: running random simulation...
+[2026-06-13T23:57:12.317Z]   CALIFORNIA: computing final rankings...
+[2026-06-13T23:57:12.332Z]   CALIFORNIA: generating BBFS 7 Digit Utama...
+[2026-06-13T23:57:12.365Z] Analyzing market: CHINAPOOLS (1615 records)
+[2026-06-13T23:57:12.373Z]   CHINAPOOLS: running preset selection (20 presets × 2D+3D)
 
 == GENERATED FILE TIMES ==
 total 3.1M
@@ -64,7 +80,7 @@ drwxr-xr-x 2 www-data www-data    6 Jun 13 22:43 checkpoints
 -rw-r--r-- 1 www-data www-data  392 Jun 13 22:44 latest_super_max_summary.json
 -rw-r--r-- 1 www-data www-data  248 Jun 13 22:48 latest_warnings.json
 -rw-r--r-- 1 www-data www-data  580 Jun 13 22:44 manifest.json
-drwxr-xr-x 2 www-data www-data 4.0K Jun 13 23:11 markets
+drwxr-xr-x 2 www-data www-data 4.0K Jun 14 06:57 markets
 -rw-r--r-- 1 www-data www-data  28K Jun 13 22:11 markets.json
 
 == AUDIT HEAD ==
