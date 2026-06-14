@@ -1,0 +1,135 @@
+name: VPS Control
+
+on:
+  workflow_dispatch:
+    inputs:
+      task:
+        description: "Task"
+        required: true
+        default: "status"
+        type: choice
+        options:
+          - status
+          - fix-nginx-prediksi
+          - reload-nginx
+          - dashboard-check
+          - supermax-status
+
+jobs:
+  vps-control:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check required secrets
+        shell: bash
+        run: |
+          test -n "${{ secrets.VPS_HOST }}" || { echo "Missing VPS_HOST"; exit 1; }
+          test -n "${{ secrets.VPS_USER }}" || { echo "Missing VPS_USER"; exit 1; }
+          test -n "${{ secrets.VPS_SSH_KEY }}" || { echo "Missing VPS_SSH_KEY"; exit 1; }
+
+      - name: Configure SSH
+        shell: bash
+        run: |
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          printf '%s\n' "${{ secrets.VPS_SSH_KEY }}" > ~/.ssh/vps_key
+          chmod 600 ~/.ssh/vps_key
+          ssh-keyscan -p "${{ secrets.VPS_PORT || '22' }}" -H "${{ secrets.VPS_HOST }}" >> ~/.ssh/known_hosts
+
+      - name: Run selected VPS task
+        shell: bash
+        run: |
+          TASK="${{ inputs.task }}"
+          PORT="${{ secrets.VPS_PORT || '22' }}"
+          ssh -i ~/.ssh/vps_key -p "$PORT" "${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}" "TASK='$TASK' bash -s" <<'REMOTE'
+          set -euo pipefail
+          cd /root/vpsjhunaey 2>/dev/null || cd /var/www/html/prediksi
+
+          case "$TASK" in
+            status)
+              echo "== SYSTEM =="
+              hostname
+              date -Is
+              nginx -t
+              systemctl is-active nginx || true
+              echo "== HTTP =="
+              curl -k -s -o /dev/null -w "root=%{http_code}\n" https://jhunaey.my.id/
+              curl -k -s -o /dev/null -w "prediksi=%{http_code}\n" https://jhunaey.my.id/prediksi/
+              curl -k -s -o /dev/null -w "data_loader=%{http_code}\n" https://jhunaey.my.id/prediksi/assets/js/data-loader.js
+              curl -k -s -o /dev/null -w "markets_json=%{http_code}\n" https://jhunaey.my.id/prediksi/data/generated/markets.json
+              ;;
+
+            fix-nginx-prediksi)
+              sudo cp /etc/nginx/sites-available/jhunaey.my.id /etc/nginx/sites-available/jhunaey.my.id.bak_$(date +%Y%m%d_%H%M%S)
+              sudo python3 - <<'PY'
+          from pathlib import Path
+          p = Path('/etc/nginx/sites-available/jhunaey.my.id')
+          s = p.read_text()
+          block = r'''
+              location ^~ /prediksi/assets/ {
+                  alias /var/www/html/prediksi/assets/;
+                  try_files $uri =404;
+              }
+
+              location ^~ /prediksi/data/generated/ {
+                  alias /var/www/html/prediksi/data/generated/;
+                  default_type application/json;
+                  add_header Cache-Control "no-store, no-cache, must-revalidate, proxy-revalidate";
+                  try_files $uri =404;
+              }
+
+              location ^~ /prediksi/server/ { return 403; }
+              location ^~ /prediksi/logs/ { return 403; }
+              location = /prediksi/data/all_results_from_source_file.json { return 403; }
+          '''
+          import re
+          s = re.sub(r'\n\s*location \^~ /prediksi/assets/ \{.*?\n\s*\}', '\n', s, flags=re.S)
+          s = re.sub(r'\n\s*location \^~ /prediksi/data/generated/ \{.*?\n\s*\}', '\n', s, flags=re.S)
+          s = re.sub(r'\n\s*location \^~ /prediksi/server/ \{.*?\}', '\n', s, flags=re.S)
+          s = re.sub(r'\n\s*location \^~ /prediksi/logs/ \{.*?\}', '\n', s, flags=re.S)
+          s = re.sub(r'\n\s*location = /prediksi/data/all_results_from_source_file\.json \{.*?\}', '\n', s, flags=re.S)
+          needle = 'server_name jhunaey.my.id www.jhunaey.my.id;'
+          pos = s.find(needle)
+          if pos == -1:
+              raise SystemExit('server_name tidak ditemukan')
+          line_end = s.find('\n', pos)
+          s = s[:line_end+1] + block + s[line_end+1:]
+          p.write_text(s)
+          PY
+              sudo nginx -t
+              sudo systemctl reload nginx
+              curl -k -s -o /dev/null -w "prediksi=%{http_code}\n" https://jhunaey.my.id/prediksi/
+              curl -k -s -o /dev/null -w "data_loader=%{http_code}\n" https://jhunaey.my.id/prediksi/assets/js/data-loader.js
+              curl -k -s -o /dev/null -w "dashboard_js=%{http_code}\n" https://jhunaey.my.id/prediksi/assets/js/dashboard.js
+              curl -k -s -o /dev/null -w "markets_json=%{http_code}\n" https://jhunaey.my.id/prediksi/data/generated/markets.json
+              curl -k -s -o /dev/null -w "server_dir=%{http_code}\n" https://jhunaey.my.id/prediksi/server/
+              curl -k -s -o /dev/null -w "logs_dir=%{http_code}\n" https://jhunaey.my.id/prediksi/logs/
+              ;;
+
+            reload-nginx)
+              sudo nginx -t
+              sudo systemctl reload nginx
+              systemctl is-active nginx
+              ;;
+
+            dashboard-check)
+              curl -k -I https://jhunaey.my.id/prediksi/
+              curl -k -I https://jhunaey.my.id/prediksi/assets/js/data-loader.js
+              curl -k -I https://jhunaey.my.id/prediksi/assets/js/dashboard.js
+              curl -k -I https://jhunaey.my.id/prediksi/data/generated/markets.json
+              ;;
+
+            supermax-status)
+              if [ -x scripts/supermax_status.sh ]; then
+                bash scripts/supermax_status.sh
+              else
+                ps aux | grep -E 'analyze|run_analysis|supermax|node' | grep -v grep || true
+              fi
+              ;;
+
+            *)
+              echo "Unknown task: $TASK"
+              exit 2
+              ;;
+          esac
+          REMOTE
